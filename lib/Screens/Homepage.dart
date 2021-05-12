@@ -34,7 +34,7 @@ class _homepageState extends State<homepage> {
                     SizedBox(height: 20,),
                     Container(
                         height: 130,
-                        width: 340,
+                        width: breadth-40,
                         decoration: BoxDecoration(
                             color: Colors.blueAccent,
                             border: Border.all(
@@ -48,13 +48,13 @@ class _homepageState extends State<homepage> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(20,40,0,0),
-                                  child: Text("TOTAL Recovery",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
+                                  child: Text("TOTAL Cases",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
                                 ),
                                 Text(decodedJson["cases"].toString(),style: TextStyle(fontSize: 23,color: Colors.white),)
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(50,0,0,0),
+                              padding: EdgeInsets.fromLTRB(80,0,0,0),
                               child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/covidBlue.png",scale: 1.5,),
                             )
                           ],
@@ -78,13 +78,13 @@ class _homepageState extends State<homepage> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(20,40,0,0),
-                                  child: Text("TOTAL Recovery",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
+                                  child: Text("TOTAL Death",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
                                 ),
                                 Text(decodedJson["deaths"].toString(),style: TextStyle(fontSize: 23,color: Colors.white),)
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(50,0,0,0),
+                              padding: EdgeInsets.fromLTRB(80,0,0,0),
                               child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/death.png",scale: 1.5,),
                             )
                           ],

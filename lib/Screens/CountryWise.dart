@@ -12,15 +12,11 @@ class country extends StatefulWidget {
 
 class _countryState extends State<country> {
   final fieldText = TextEditingController();
-  bool pressed;
-  List data=[];
-  List data1=[];
-  TextEditingController _controller = new TextEditingController();
+  int searched = -1;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    pressed=false;
   }
   @override
   Widget build(BuildContext context) {
@@ -31,7 +27,6 @@ class _countryState extends State<country> {
       builder: (context,snapshot){
 
         if(snapshot.hasData){
-
           var value = snapshot.data;
           var decodedJson = json.decode(value.body);
           return Scaffold(
@@ -52,9 +47,8 @@ class _countryState extends State<country> {
                           prefixIcon: Icon(Icons.search,color: Colors.white,),
                           suffixIcon: IconButton(
                             onPressed: (){
-                              data.removeAt(0);
-                              data1.removeAt(0);
                               setState(() {
+                                searched=-1;
                                 fieldText.clear();
                               });
 
@@ -70,21 +64,25 @@ class _countryState extends State<country> {
                   IconButton(
                     icon: Icon(Icons.search),
                     onPressed: (){
-                      data=[];
-                      data1=[];
                       for (int i=0;i<decodedJson.length;i++){
                         if (fieldText.text==decodedJson[i]["country"]){
                           setState(() {
-                            data.insert(0,fieldText.text);
-                            data1.insert(0,decodedJson[i]["cases"].toString());
+                            searched=i;
                           });
                         }
+
+                      };
+                      if (fieldText.text.isEmpty && searched==-1){
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter a Country")));
+                      }
+                      if(fieldText.text.isNotEmpty && searched==-1){
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No Such Country Found . Check Spelling !!!")));
                       }
                     },
                   )
                 ],
               ),
-              body: data.isEmpty?ListView.builder(
+              body: searched==-1?ListView.builder(
                   itemCount: decodedJson.length,
                   itemBuilder: (context,index){
                     return GestureDetector(
@@ -128,17 +126,17 @@ class _countryState extends State<country> {
                           child: ListTile(
                             leading: ClipOval(
                               child: Image.network(
-                                decodedJson[index]["countryInfo"]["flag"],
+                                decodedJson[searched]["countryInfo"]["flag"],
                                 width: 50,
                                 height: 50,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            title: Text(data[0],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                            title: Text(decodedJson[searched]["country"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                             subtitle: Row(
                               children: [
                                 Text("Total Cases:"),
-                                Text(data1[0].toString()),
+                                Text(decodedJson[searched]["cases"].toString()),
                               ],
                             ),
                           ),

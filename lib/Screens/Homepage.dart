@@ -65,11 +65,11 @@ class _homepageState extends State<homepage> {
                     SizedBox(height: 10,),
                     Container(
                         height: 130,
-                        width: 340,
+                        width: breadth-40,
                         decoration: BoxDecoration(
                             color: Color.fromRGBO(220,28,49,1),
                             border: Border.all(
-                              color: Colors.blueAccent,
+                              color: Color.fromRGBO(220,28,49,1),
                             ),
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),
@@ -99,7 +99,7 @@ class _homepageState extends State<homepage> {
                         decoration: BoxDecoration(
                             color: Color.fromRGBO(10,190,60,1),
                             border: Border.all(
-                              color: Colors.blueAccent,
+                              color: Color.fromRGBO(10,190,60,1),
                             ),
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),

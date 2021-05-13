@@ -1,15 +1,17 @@
 import 'dart:convert';
 
+import 'package:covid_infos/Screens/CountryWise.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
+
 class homepage extends StatefulWidget {
   @override
   _homepageState createState() => _homepageState();
 }
 
 class _homepageState extends State<homepage> {
-
   @override
   Widget build(BuildContext context) {
     var breadth=MediaQuery.of(context).size.width;
@@ -125,14 +127,31 @@ class _homepageState extends State<homepage> {
 
               ),
             ),
+            floatingActionButton: FloatingActionButton(
+              child: IconButton(onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => country()));
+                },
+                  icon: Icon(Icons.flag,size: 30,),),
+            ),
           );
+
         }
         else{
           return Scaffold(
-            body: Center(child: SpinKitWave(color: Colors.white, type: SpinKitWaveType.start),),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SpinKitChasingDots(color: Colors.black,size: 100,),
+                SizedBox(height: 50,),
+                Text("Loading ...",style: TextStyle(fontSize: 26,color: Colors.red,fontWeight: FontWeight.bold),)
+              ],
+            ),
           );
         }
       },
     );
+
   }
 }

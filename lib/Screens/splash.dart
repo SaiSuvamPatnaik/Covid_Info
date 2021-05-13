@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:covid_infos/Screens/Homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -24,7 +23,10 @@ class _splashState extends State<splash> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/covidRed.png",scale: 0.9,),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15,0,0,0),
+            child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/covidRed.png",scale: 0.9,),
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15,0,0,0),
             child: SpinKitPouringHourglass(color: Colors.black,size: 70,),
@@ -33,6 +35,7 @@ class _splashState extends State<splash> {
           Text("Stay Indoor | Stay Safe",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),)
         ],
       ),
+
     );
   }
 }

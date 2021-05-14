@@ -17,7 +17,6 @@ class _indivisualState extends State<indivisual> {
     double percentage = (decodedjson[index]["cases"])/(decodedjson[index]["population"])*10;
     int a = (percentage*100).toInt();
     double b = a/100;
-    print(b);
     print(decodedjson[index]);
     return Scaffold(
       body: Container(
@@ -30,7 +29,8 @@ class _indivisualState extends State<indivisual> {
               child: Image.network(decodedjson[index]["countryInfo"]["flag"],scale: 2,),
             ),
             SizedBox(height: 20,),
-            Text(decodedjson[index]["country"],style: TextStyle(fontSize:40,color: Colors.black,fontWeight: FontWeight.w600),),
+            decodedjson[index]["country"].length>16?Text(decodedjson[index]["country"],style: TextStyle(fontSize:30,color: Colors.black,fontWeight: FontWeight.w600),)
+            :Text(decodedjson[index]["country"],style: TextStyle(fontSize:40,color: Colors.black,fontWeight: FontWeight.w600),),
             Padding(
               padding: EdgeInsets.fromLTRB(0,20,0,0),
               child: Row(
@@ -100,8 +100,12 @@ class _indivisualState extends State<indivisual> {
               animation: true,
               animationDuration: 1200,
               lineWidth: 15.0,
-              percent: b,
-              center: new Text(
+              percent: b>1.0?b/10:b,
+              center: b>1.0?Text(
+                (b/10).toString()+"%",
+                style:
+                new TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+              ):Text(
                 "$b%",
                 style:
                 new TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
@@ -109,7 +113,7 @@ class _indivisualState extends State<indivisual> {
               footer: Padding(
                 padding: const EdgeInsets.fromLTRB(0,10,0,0),
                 child: new Text(
-                  "Affected With Covid",
+                  "Approx Affection With Covid",
                   style:
                   new TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
                 ),

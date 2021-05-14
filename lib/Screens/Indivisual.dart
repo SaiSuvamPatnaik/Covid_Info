@@ -102,11 +102,11 @@ class _indivisualState extends State<indivisual> {
               lineWidth: 15.0,
               percent: b>1.0?b/10:b,
               center: b>1.0?Text(
-                (b/10).toString()+"%",
+                (((b*100/10).toInt())).toString()+"%",
                 style:
                 new TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
               ):Text(
-                "$b%",
+                (b*100).toString()+"%",
                 style:
                 new TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
               ),

@@ -84,7 +84,7 @@ class _indivisualState extends State<indivisual> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Recovered",style: TextStyle(color: Colors.white,fontSize: 25),),
+                                Text("Recovered",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
                                 Text(decodedjson[index]["recovered"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                               ],
                             )),
@@ -146,7 +146,7 @@ class _indivisualState extends State<indivisual> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Total Death",style: TextStyle(color: Colors.white,fontSize: 25),),
+                            Text("Total Death",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
                             Text(decodedjson[index]["deaths"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                           ],
                         )),
@@ -174,7 +174,7 @@ class _indivisualState extends State<indivisual> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Active Cases",style: TextStyle(color: Colors.white,fontSize: 25),),
+                              Text("Active Cases",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
                               Text(decodedjson[index]["active"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                             ],
                           )),

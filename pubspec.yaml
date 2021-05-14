@@ -31,6 +31,8 @@ dependencies:
   flutter_spinkit:
   http: ^0.12.2
   bubble_bottom_bar:
+  provider:
+  percent_indicator:
 
 dev_dependencies:
   flutter_test:

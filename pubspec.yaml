@@ -30,9 +30,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_spinkit:
   http: ^0.12.2
-  bubble_bottom_bar:
   provider:
   percent_indicator:
+  fab_circular_menu:
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,5 @@
+import 'package:covid_infos/Screens/Covidcases/statewise.dart';
+import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 class indivisual extends StatefulWidget {
@@ -17,7 +19,6 @@ class _indivisualState extends State<indivisual> {
     double percentage = (decodedjson[index]["cases"])/(decodedjson[index]["population"])*10;
     int a = (percentage*100).toInt();
     double b = a/100;
-    print(decodedjson[index]);
     return Scaffold(
       body: Container(
         color: Colors.grey[200],
@@ -186,6 +187,32 @@ class _indivisualState extends State<indivisual> {
           ],
         ),
       ),
+      floatingActionButton: decodedjson[index]["country"]=="India"?FabCircularMenu(
+          ringWidth: 60,
+          fabElevation: 10,
+          fabColor: Colors.blueAccent,
+          ringColor: Colors.redAccent,
+          ringDiameter: 330,
+          children: <Widget>[
+            IconButton(icon: Icon(Icons.people,color: Colors.white,size: 35,), onPressed: () {
+              print('Home');
+            }),
+            IconButton(icon: Icon(Icons.info,color: Colors.white,size: 35), onPressed: () {
+              print('Favorite');
+            }),
+            IconButton(icon: Icon(Icons.money,color: Colors.white,size: 35,), onPressed: () {
+              print('Home');
+            }),
+            IconButton(icon: Icon(Icons.flag,color: Colors.white,size: 35,), onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => statewise()));
+            }),
+            IconButton(icon: Icon(Icons.medical_services,color: Colors.white,size: 35), onPressed: () {
+              print('Favorite');
+            })
+          ]
+      ):Text(""),
     );
   }
 }

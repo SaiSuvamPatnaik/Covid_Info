@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
-
+import 'package:covid_infos/DataFetching/countrywise.dart';
 import 'package:covid_infos/Provider/Onsearch.dart';
-import 'package:covid_infos/Screens/Indivisual.dart';
+import 'package:covid_infos/Screens/Covidcases/Indivisual.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,17 +21,13 @@ class _countryState extends State<country> {
   }
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider<onsearch>(
       create: (context) => onsearch(),
-      
       child: Builder(
         builder: (context){
           return FutureBuilder(
-
-            future: http.get("https://corona.lmao.ninja/v2/countries?yesterday&sort"),
+            future: countrywise().countries(),
             builder: (context,snapshot){
-
               if(snapshot.hasData){
                 var value = snapshot.data;
                 List decodedJson = json.decode(value.body);
@@ -74,7 +69,6 @@ class _countryState extends State<country> {
                                 if (fieldText.text==decodedJson[i]["country"]){
                                   data.countryfound(i);
                                 }
-
                               };
                               if (fieldText.text.isEmpty && data.countryfound1()==-1){
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter a Country")));
@@ -152,7 +146,6 @@ class _countryState extends State<country> {
                               ),
                             );
                           }),
-
 
                     );
                   },

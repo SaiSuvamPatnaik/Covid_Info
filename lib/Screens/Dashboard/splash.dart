@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:covid_infos/Screens/Homepage.dart';
+import 'package:covid_infos/Screens/Dashboard/Homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 class splash extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:covid_infos/Screens/CountryWise.dart';
+import 'package:covid_infos/DataFetching/Worlddata.dart';
+import 'package:covid_infos/Screens/Covidcases/CountryWise.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,7 +17,7 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     var breadth=MediaQuery.of(context).size.width;
     return FutureBuilder(
-      future: http.get("https://coronavirus-19-api.herokuapp.com/all"),
+      future: worlddata().world(),
       builder: (context,snapshot){
         if (snapshot.hasData){
           var value = snapshot.data;

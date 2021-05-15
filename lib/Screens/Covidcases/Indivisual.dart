@@ -190,6 +190,8 @@ class _indivisualState extends State<indivisual> {
       floatingActionButton: decodedjson[index]["country"]=="India"?FabCircularMenu(
           ringWidth: 60,
           fabElevation: 10,
+          fabOpenIcon: Icon(Icons.menu,color: Colors.white,size: 27,),
+          fabCloseIcon: Icon(Icons.close,color: Colors.white,size: 27,),
           fabColor: Colors.blueAccent,
           ringColor: Colors.redAccent,
           ringDiameter: 330,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:covid_infos/DataFetching/Statedatas.dart';
+import 'package:covid_infos/Screens/Covidcases/Indivisual_State.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class statewise extends StatefulWidget {
 }
 
 class _statewiseState extends State<statewise> {
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -24,12 +26,14 @@ class _statewiseState extends State<statewise> {
             for (var i in data.keys){
               datas1.add(i);
             }
+            datas1.removeAt(8);  // Removed Daman and Diu as its datas were not present in the API.
             for (var j in data.values){
               datas2.add(j);
             }
-
+            datas2.removeAt(8); // Removed Daman and Diu as its datas were not present in the API.
             return Scaffold(
-              appBar: AppBar(),
+              appBar: AppBar(
+                title: Text("Statewise Covid Cases"),),
               body: Padding(
                 padding: const EdgeInsets.fromLTRB(0,10,0,0),
                 child: ListView.builder(
@@ -49,7 +53,10 @@ class _statewiseState extends State<statewise> {
                             title: Text(datas2[index]),
                             trailing: IconButton(
                               onPressed: (){
-
+                                String logo;
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index])));
                               },
                               icon: Icon(Icons.info_outline,color: Colors.black,size: 30,),
                             ),
@@ -64,7 +71,8 @@ class _statewiseState extends State<statewise> {
           }
           else{
             return Scaffold(
-              appBar: AppBar(),
+              appBar: AppBar(
+                title: Text("Statewise Covid Cases"),),
               body: Center(child: SpinKitCircle(color: Colors.black,size: 100,),),
             );
           }

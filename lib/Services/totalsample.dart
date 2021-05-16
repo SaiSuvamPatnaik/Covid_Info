@@ -82,7 +82,6 @@ class _totalsampleState extends State<totalsample> {
                                     else{
                                       difference = decodedJson["data"][data.updatedindex()]["totalSamplesTested"]-decodedJson["data"][data.updatedindex()-1]["totalSamplesTested"];
                                     }
-                                    print(difference);
                                   },
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),

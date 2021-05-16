@@ -31,10 +31,10 @@ class _homepageState extends State<homepage> {
                     Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20,10,0,0),
-                          child: Text("Global Covid-19",style: TextStyle(fontSize: 35),),
+                          padding: const EdgeInsets.fromLTRB(25,10,0,0),
+                          child: Text("Global Covid-19",style: TextStyle(fontSize: 35,fontFamily: "Sergoeui",fontWeight: FontWeight.bold),),
                         )),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 15,),
                     Container(
                         height: 130,
                         width: breadth-40,

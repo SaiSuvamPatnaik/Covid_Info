@@ -1,4 +1,3 @@
-import 'package:covid_infos/Basic_infos_about_Covid/Trial.dart';
 import 'package:covid_infos/Basic_infos_about_Covid/basicinfo.dart';
 import 'package:covid_infos/Screens/Covidcases/statewise.dart';
 import 'package:covid_infos/Services/totalsample.dart';

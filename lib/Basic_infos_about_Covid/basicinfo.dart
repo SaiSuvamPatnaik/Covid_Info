@@ -5,64 +5,91 @@ class infos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("INFOS"),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          '''Most people who become sick with COVID-19 will only experience mild illness and can recover at home. Symptoms might last a few days, and people who have the virus might feel better in about a week. Treatment is aimed at relieving symptoms and includes rest, fluid intake and pain relievers.'''
-              .text
-              .xl
-              .make(),
+          Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(90,40,0,20),
+                  child: Image.asset("Assets/Images/CROPPED.jpeg",scale: 4,),
+                )
+              ],),
+          Text("Most people who become sick with COVID-19 will only experience mild illness and can recover at home. Symptoms might last a few days, and people who have the virus might feel better in about a week. Treatment is aimed at relieving symptoms and includes rest, fluid intake and pain relievers."
+            ,style: TextStyle(fontSize: 18)),
+
           20.heightBox,
-          "Protecting yourself while caring for someone with COVID-19"
-              .text
-              .xl2
-              .bold
-              .make(),
-          10.heightBox,
+
+          Text("Protecting yourself while caring for someone with COVID-19",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+
+          SizedBox(height: 30,),
+
           [
             // if (!Vx.isWeb)
-            SvgPicture.network("https://raw.githubusercontent.com/iampawan/IndiaBeatsCovid/main/assets/images/doctor-woman.svg",
-              height: 300.0,
-            ).w32(context).centered(),
-            VxDiscList(
-              [
-                "Keep your hands clean and away from your face",
-                "Wear a face mask",
-                "Clean your home frequently",
-                "Be careful with laundry",
-                "Be careful with dishes",
-                "Avoid direct contact with the sick person's bodily fluids",
-                "Avoid having unnecessary visitors in your home"
-              ],
-              fontSize: 16,
-              color: context.textTheme.bodyText1.color,
-            ).w56(context),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,0,0,0),
+              child: SvgPicture.network("https://raw.githubusercontent.com/iampawan/IndiaBeatsCovid/main/assets/images/doctor-woman.svg",
+                height: 300.0,
+              ).w32(context).centered(),
+            ),
+            Expanded(
+              flex: 3,
+              child: Wrap(
+                children: <Widget>[
+                  Text('1. Keep your hands clean and away from your face',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('2. Wear a face mask',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('3. Clean your home frequently',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('4. Be careful with laundry',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('5. Be careful with dishes',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text("6. Avoid direct contact with the sick person's bodily fluids",style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('7. Avoid having unnecessary visitors in your home',style: TextStyle(fontSize: 17),),
+
+                ],
+              ),
+            ),
           ].hStack(crossAlignment: CrossAxisAlignment.start),
-          20.heightBox,
+
+          30.heightBox,
+
           "Emergency warning signs".text.xl2.bold.make(),
-          10.heightBox,
+
+          SizedBox(height: 15,),
+
           [
-            VxDiscList(
-              [
-                "Trouble breathing",
-                "Persistent chest pain or pressure",
-                "New confusion",
-                "Inability to stay awake",
-                "Pale, gray or blue-colored skin, lips or nail beds — depending on skin tone"
-              ],
-              color: context.textTheme.bodyText1.color,
-            ).w56(context),
+            Expanded(
+              flex: 3,
+              child: Wrap(
+                children: <Widget>[
+                  Text('* Trouble breathing',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('* Persistent chest pain or pressure',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('* New confusion',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('* Inability to stay awake',style: TextStyle(fontSize: 17),),
+                  Text("                                                  ",style: TextStyle(fontSize: 10),),
+                  Text('* Pale, gray or blue-colored skin, lips or nail beds — depending on skin tone',style: TextStyle(fontSize: 17),),
+
+                ],
+              ),
+            ),
             // if (!Vx.isWeb)
             SvgPicture.network("https://raw.githubusercontent.com/iampawan/IndiaBeatsCovid/main/assets/images/mask-woman.svg",
               height: 200.0,
             ).w32(context).centered(),
           ].hStack(crossAlignment: CrossAxisAlignment.start),
+
           20.heightBox,
+
           "At-Home Coronavirus Treatment".text.xl2.bold.make(),
+
           VxDiscList(
             [
               "Rest. It can make you feel better and may speed your recovery.",
@@ -72,10 +99,14 @@ class infos extends StatelessWidget {
               "Monitor. If your symptoms get worse, call your doctor right away. Don't go to their office without calling first. They might tell you to stay home, or they may need to take extra steps to protect staff and other patients.",
               "Ask your doctor about over-the-counter medicines that may help, like acetaminophen to lower your fever.",
             ],
+            fontSize: 17,
             color: context.textTheme.bodyText1.color,
           ),
+
           20.heightBox,
+
           "Monitoring Tips".text.xl2.bold.make(),
+
           VxDiscList(
             [
               "Keep the fans on and windows open",
@@ -84,9 +115,12 @@ class infos extends StatelessWidget {
               "Measure Pulse, O2 Saturation and Temperature every 6 hours",
               "Immediately consult your doctor if saturation goes below 90-92",
             ],
+            fontSize: 17,
             color: context.textTheme.bodyText1.color,
           ),
+
           20.heightBox,
+
           "Some simple useful medicines for everyone (Consult doctor if required or in emergency)"
               .text
               .xl2
@@ -102,6 +136,7 @@ class infos extends StatelessWidget {
                 "Doxycycline",
                 "Vitamin C & Zinc"
               ],
+              fontSize: 17,
               color: context.textTheme.bodyText1.color,
             ).w56(context),
             // if (!Vx.isWeb)

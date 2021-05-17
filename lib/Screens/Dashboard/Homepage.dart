@@ -96,32 +96,32 @@ class _homepageState extends State<homepage> {
                       ),
                       SizedBox(height: 10,),
                       Container(
-                          height: 130,
-                          width: breadth-40,
-                          decoration: BoxDecoration(
+                        height: 130,
+                        width: breadth-40,
+                        decoration: BoxDecoration(
+                            color: Color.fromRGBO(10,190,60,1),
+                            border: Border.all(
                               color: Color.fromRGBO(10,190,60,1),
-                              border: Border.all(
-                                color: Color.fromRGBO(10,190,60,1),
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(20))
-                          ),
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(20,40,0,0),
-                                    child: Text("TOTAL Recovery",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
-                                  ),
-                                  Text(decodedJson["recovered"].toString(),style: TextStyle(fontSize: 23,color: Colors.white),)
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(50,0,0,0),
-                                child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/recover.png",scale: 1.5,),
-                              )
-                            ],
-                          ),
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        child: Row(
+                          children: [
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(20,40,0,0),
+                                  child: Text("TOTAL Recovery",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
+                                ),
+                                Text(decodedJson["recovered"].toString(),style: TextStyle(fontSize: 23,color: Colors.white),)
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(50,0,0,0),
+                              child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/recover.png",scale: 1.5,),
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(height: 20,),
                       Text("ADDITIONAL INFOS",style: TextStyle(fontFamily: "SurfingCapital",fontSize: 35,color: Colors.red,fontWeight: FontWeight.w600,letterSpacing: 2),),
@@ -140,7 +140,7 @@ class _homepageState extends State<homepage> {
                                       begin: Alignment.bottomRight,
                                       end: Alignment.topLeft,
                                       colors: [Color(0xFF614385),Color(0xFF516395)]),
-                                color: Colors.red,
+                                  color: Colors.red,
                                   border: Border.all(
                                     color: Colors.blueAccent,
                                   ),
@@ -150,21 +150,21 @@ class _homepageState extends State<homepage> {
                               width: 180,
                               child: Center(
                                   child:
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(10,0,0,0),
-                                          child: Icon(Icons.local_hospital_outlined,size: 30,color: Colors.white,),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(10,10,0,0),
-                                          child: Text("Hospitals",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                        ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                                        child: Icon(Icons.local_hospital_outlined,size: 30,color: Colors.white,),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                                        child: Text("Hospitals",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                      ),
 
-                                      ],
-                                    )),
+                                    ],
+                                  )),
                             ),
                           ),
                           Padding(

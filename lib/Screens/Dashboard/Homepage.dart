@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:covid_infos/Basic_infos_about_Covid/General/govtinfo.dart';
+import 'package:covid_infos/Basic_infos_about_Covid/General/twittersearch.dart';
+import 'package:covid_infos/Basic_infos_about_Covid/Hospital/hospitals.dart';
 import 'package:covid_infos/DataFetching/Worlddata.dart';
 import 'package:covid_infos/Screens/Covidcases/CountryWise.dart';
 import 'package:flutter/cupertino.dart';
@@ -129,46 +132,12 @@ class _homepageState extends State<homepage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Card(
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.bottomRight,
-                                      end: Alignment.topLeft,
-                                      colors: [Color(0xFF614385),Color(0xFF516395)]),
-                                  color: Colors.red,
-                                  border: Border.all(
-                                    color: Colors.blueAccent,
-                                  ),
-                                  borderRadius: BorderRadius.all(Radius.circular(20))
-                              ),
-                              height: 140,
-                              width: 180,
-                              child: Center(
-                                  child:
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(10,0,0,0),
-                                        child: Icon(Icons.local_hospital_outlined,size: 30,color: Colors.white,),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(10,10,0,0),
-                                        child: Text("Hospitals",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                      ),
-
-                                    ],
-                                  )),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(5,2,2,2),
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => hospital()));
+                            },
                             child: Card(
                               elevation: 10,
                               shape: RoundedRectangleBorder(
@@ -179,9 +148,10 @@ class _homepageState extends State<homepage> {
                                     gradient: LinearGradient(
                                         begin: Alignment.bottomRight,
                                         end: Alignment.topLeft,
-                                        colors: [Color(0xFF4568dc),Color(0xFFb06ab3)]),
+                                        colors: [Color(0xFF614385),Color(0xFF516395)]),
+                                    color: Colors.red,
                                     border: Border.all(
-                                      color: Color.fromRGBO(10,190,60,1),
+                                      color: Colors.blueAccent,
                                     ),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
@@ -190,18 +160,65 @@ class _homepageState extends State<homepage> {
                                 child: Center(
                                     child:
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                                          padding: const EdgeInsets.fromLTRB(10,0,0,0),
                                           child: Icon(Icons.local_hospital_outlined,size: 30,color: Colors.white,),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(10,10,0,0),
-                                          child: Text("Govt Info",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                          child: Text("Hospitals",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
                                         ),
+
                                       ],
                                     )),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => govtinfo()));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(5,2,2,2),
+                              child: Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.bottomRight,
+                                          end: Alignment.topLeft,
+                                          colors: [Color(0xFF4568dc),Color(0xFFb06ab3)]),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(10,190,60,1),
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(20))
+                                  ),
+                                  height: 140,
+                                  width: 180,
+                                  child: Center(
+                                      child:
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                                            child: Icon(Icons.local_hospital_outlined,size: 30,color: Colors.white,),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                                            child: Text("Govt Info",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                          ),
+                                        ],
+                                      )),
+                                ),
                               ),
                             ),
                           )
@@ -212,38 +229,45 @@ class _homepageState extends State<homepage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Card(
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.bottomRight,
-                                      end: Alignment.topLeft,
-                                      colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
-                                  border: Border.all(
-                                    color: Color.fromRGBO(220,28,49,1),
-                                  ),
-                                  borderRadius: BorderRadius.all(Radius.circular(20))
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => twittersearch()));
+                            },
+                            child: Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
-                              height: 140,
-                              width: 180,
-                              child: Center(
-                                  child:
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                                        child: Icon(Icons.local_hospital_outlined,size: 30,color: Colors.white,),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(0,10,0,0),
-                                        child: Text("Twitter Search",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                      ),                                    ],
-                                  )),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.bottomRight,
+                                        end: Alignment.topLeft,
+                                        colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
+                                    border: Border.all(
+                                      color: Color.fromRGBO(220,28,49,1),
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                height: 140,
+                                width: 180,
+                                child: Center(
+                                    child:
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                                          child: Icon(Icons.local_hospital_outlined,size: 30,color: Colors.white,),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(0,10,0,0),
+                                          child: Text("Twitter Search",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                        ),                                    ],
+                                    )),
+                              ),
                             ),
                           ),
                           Padding(
@@ -286,7 +310,7 @@ class _homepageState extends State<homepage> {
                           ),
                         ],
                       ),
-                      
+
                       SizedBox(height: 30,),
                       Text("VERSION - 1.1.1",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       SizedBox(height: 10,),

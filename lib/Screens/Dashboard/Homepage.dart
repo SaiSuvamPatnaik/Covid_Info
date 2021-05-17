@@ -286,6 +286,7 @@ class _homepageState extends State<homepage> {
                           ),
                         ],
                       ),
+                      
                       SizedBox(height: 30,),
                       Text("VERSION - 1.1.1",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       SizedBox(height: 10,),

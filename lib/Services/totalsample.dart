@@ -33,7 +33,13 @@ class _totalsampleState extends State<totalsample> {
                   builder: (context,data,child){
                     return Scaffold(
                       appBar: AppBar(
-                        title: Text("Samples Tested"),
+                        leading: Icon(Icons.arrow_back,color: Colors.black,size: 25,),
+                        title: Padding(
+                          padding: const EdgeInsets.fromLTRB(0,10,0,0),
+                          child: Text("Samples Tested",style: TextStyle(fontFamily: "Bosk",fontSize: 30,color: Colors.black),),
+                        ),
+                        backgroundColor: Colors.white,
+                        elevation: 3,
                       ),
                       body: Padding(
                         padding: const EdgeInsets.fromLTRB(0,230,0,0),

@@ -198,35 +198,29 @@ class _indivisualState extends State<indivisual> {
         ),
       ),
       floatingActionButton: decodedjson[index]["country"]=="India"?FabCircularMenu(
-          ringWidth: 60,
+          ringWidth: 70,
           fabElevation: 10,
           fabOpenIcon: Icon(Icons.menu,color: Colors.white,size: 27,),
           fabCloseIcon: Icon(Icons.close,color: Colors.white,size: 27,),
           fabColor: Colors.blueAccent,
           ringColor: Colors.redAccent,
-          ringDiameter: 330,
+          ringDiameter: 270,
           children: <Widget>[
-            IconButton(icon: Icon(Icons.people,color: Colors.white,size: 35,), onPressed: () {
+            IconButton(icon: Icon(Icons.people,color: Colors.white,size: 40,), onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => totalsample()));
             }),
-            IconButton(icon: Icon(Icons.info,color: Colors.white,size: 35), onPressed: () {
+            IconButton(icon: Icon(Icons.info,color: Colors.white,size: 40), onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => infos()));
             }),
-            IconButton(icon: Icon(Icons.money,color: Colors.white,size: 35,), onPressed: () {
-              print('Home');
-            }),
-            IconButton(icon: Icon(Icons.flag,color: Colors.white,size: 35,), onPressed: () {
+            IconButton(icon: Icon(Icons.flag,color: Colors.white,size: 40,), onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => statewise()));
             }),
-            IconButton(icon: Icon(Icons.medical_services,color: Colors.white,size: 35), onPressed: () {
-              print('Favorite');
-            })
           ]
       ):Text(""),
     );

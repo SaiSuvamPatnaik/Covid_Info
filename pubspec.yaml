@@ -37,6 +37,7 @@ dependencies:
   velocity_x:
   flutter_svg:
   url_launcher:
+  awesome_dialog:
 
 dev_dependencies:
   flutter_test:
@@ -79,5 +80,8 @@ flutter:
     - family: Segoeui
       fonts:
         - asset: Assets/Fonts/SegoeUI.ttf
+    - family: Bosk
+      fonts:
+        - asset: Assets/Fonts/Bosk.ttf
     # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

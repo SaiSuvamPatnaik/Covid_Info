@@ -13,7 +13,7 @@ class _dateslotState extends State<dateslot> {
   _dateslotState({this.slot});
   @override
   Widget build(BuildContext context) {
-    print(slot);
+
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -104,6 +104,10 @@ class _dateslotState extends State<dateslot> {
                             ),
                             title: Text(slot["sessions"][index]["date"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                             subtitle: Text("From-:${slot["from"]}  To-:${slot["to"]}"),
+                            trailing: Padding(
+                              padding: const EdgeInsets.fromLTRB(0,0,10,0),
+                              child: Text("Min Age: "+slot["sessions"][index]["min_age_limit"].toString()),
+                            ),
                           ),
                         ),
                       ),

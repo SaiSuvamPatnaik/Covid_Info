@@ -34,7 +34,7 @@ class _countryState extends State<country> {
                 return Consumer<onsearch>(
                   builder: (context,data,child){
                     return Scaffold(
-                      appBar: AppBar(
+                      appBar: data.updatesearch()?AppBar(
                         actions: [
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0,5,0,0),
@@ -42,25 +42,26 @@ class _countryState extends State<country> {
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.black,)),
                               ),
-                              width: 300,
+                              width: 250,
                               child: TextField(
                                 cursorColor: Colors.black,
                                 controller: fieldText,
                                 style: TextStyle(color: Colors.white,fontSize: 20),
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.search,color: Colors.white,),
-                                  suffixIcon: IconButton(
-                                    onPressed: (){
-                                      data.searchclear();
-                                      fieldText.clear();
-                                    },
-                                    icon: Icon(Icons.cancel,color: Colors.white,),
-                                  ),
                                   hintText: "Search...",
                                   hintStyle: TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
+                          ),
+                          IconButton(
+                            onPressed: (){
+                              data.searchclear();
+                              fieldText.clear();
+                              data.offpresssearch();
+                            },
+                            icon: Icon(Icons.cancel,color: Colors.white,),
                           ),
                           IconButton(
                             icon: Icon(Icons.search),
@@ -78,6 +79,15 @@ class _countryState extends State<country> {
                               }
                             },
                           )
+                        ],
+                      ):AppBar(
+                        title: Text("Countries Cases"),
+                        actions: [
+                          IconButton(
+                              icon:Icon(Icons.search),
+                              onPressed: (){
+                                data.onpresssearch();
+                              })
                         ],
                       ),
                       body: data.countryfound1()==-1?ListView.builder(

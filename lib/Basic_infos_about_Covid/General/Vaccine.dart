@@ -37,7 +37,15 @@ class _vaccineState extends State<vaccine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 3,
+        leading: Icon(Icons.arrow_back,size: 30,color: Colors.black,),
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(0,5,20,0),
+          child: Text("Search For Vaccine",style: TextStyle(fontFamily: "Bosk",fontSize: 30,color: Colors.brown),),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

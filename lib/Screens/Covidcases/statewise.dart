@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:covid_infos/DataFetching/Statedatas.dart';
 import 'package:covid_infos/Screens/Covidcases/Indivisual_State.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -33,35 +34,52 @@ class _statewiseState extends State<statewise> {
             datas2.removeAt(8); // Removed Daman and Diu as its datas were not present in the API.
             return Scaffold(
               appBar: AppBar(
-                title: Text("Statewise Covid Cases"),),
+                leading: Icon(Icons.arrow_back,size: 30,color: Colors.black,),
+                backgroundColor: Colors.white,
+                elevation: 3,
+                title: Padding(
+                  padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                  child: Text("Statewise Covid Cases",style: GoogleFonts.pacifico(
+                    textStyle: TextStyle(color: Colors.brown,fontSize: 25,),
+                  ),),
+                ),),
               body: Padding(
                 padding: const EdgeInsets.fromLTRB(0,10,0,0),
                 child: ListView.builder(
                   itemCount: datas1.length,
                   itemBuilder: (context,index){
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(10,5,10,5),
-                      child: Card(
-                        elevation: 5,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 25,
-                              child: Text(datas1[index]),
-                            ),
-                            title: Text(datas2[index]),
-                            trailing: IconButton(
-                              onPressed: (){
-                                String logo;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index])));
-                              },
-                              icon: Icon(Icons.info_outline,color: Colors.black,size: 30,),
+                      padding: const EdgeInsets.fromLTRB(10,0,10,0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8,3,8,3),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                radius: 25,
+                                child: Text(datas1[index],),
+                              ),
+                              title: Text(datas2[index],style: GoogleFonts.roboto(
+                                textStyle: TextStyle(color: Colors.black,fontSize: 20,),
+                              ),),
+                              trailing: IconButton(
+                                onPressed: (){
+                                  String logo;
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index])));
+                                },
+                                icon: Icon(Icons.info_outline,color: Colors.black,size: 30,),
+                              ),
                             ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(50,0,50,0),
+                            child: Divider(
+                              thickness: 2,
+                            ),
+                          )
+                        ],
                       ),
                     );
                   },

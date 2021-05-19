@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 class onsearch extends ChangeNotifier{
   int searched=-1;
   int c=0,index;
+  bool searchpressed=false;
 
   int countryfound1(){
     return searched;
@@ -28,8 +29,20 @@ class onsearch extends ChangeNotifier{
     return c;
   }
 
+  onpresssearch(){
+    searchpressed=true;
+    notifyListeners();
+  }
+  offpresssearch(){
+    searchpressed=false;
+    notifyListeners();
+  }
   int updatedindex(){
     return index;
+  }
+
+  bool updatesearch(){
+    return searchpressed;
   }
 
 

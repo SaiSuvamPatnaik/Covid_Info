@@ -40,8 +40,14 @@ class _indivisualState extends State<indivisual> {
                   style: TextStyle(fontFamily: "SurfingCapital",fontWeight: FontWeight.w600,fontSize:30,color: Colors.black,letterSpacing: 3),),
               ),
             )
-            :Text(decodedjson[index]["country"],
-              style: TextStyle(fontFamily: "SurfingCapital",fontSize:60,color: Colors.black,fontWeight: FontWeight.w600,letterSpacing: 3),),
+            :SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20,0,20,0),
+                child: Text(decodedjson[index]["country"],
+                  style: TextStyle(fontFamily: "SurfingCapital",fontSize:60,color: Colors.black,fontWeight: FontWeight.w600,letterSpacing: 3),),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(0,10,0,0),
               child: Row(

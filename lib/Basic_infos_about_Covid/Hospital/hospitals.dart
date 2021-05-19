@@ -15,7 +15,15 @@ class _hospitalState extends State<hospital> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 3,
+        leading: Icon(Icons.arrow_back,size: 30,color: Colors.black,),
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(0,5,20,0),
+          child: Text("Hospitals Count",style: TextStyle(fontFamily: "Bosk",fontSize: 30,color: Colors.black),),
+        ),
+      ),
       body: FutureBuilder(
         future: beds().beds1(),
         builder: (context,snapshot){

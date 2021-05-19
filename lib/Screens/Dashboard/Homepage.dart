@@ -9,6 +9,7 @@ import 'package:covid_infos/Screens/Covidcases/CountryWise.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class homepage extends StatefulWidget {
@@ -128,8 +129,10 @@ class _homepageState extends State<homepage> {
                         ),
                       ),
                       SizedBox(height: 20,),
-                      Text("ADDITIONAL INFOS",style: TextStyle(fontFamily: "SurfingCapital",fontSize: 35,color: Colors.red,fontWeight: FontWeight.w600,letterSpacing: 2),),
-                      SizedBox(height: 20,),
+                      Text("ADDITIONAL INFOS",style: GoogleFonts.slabo27px(
+                        textStyle: TextStyle(color: Colors.red,fontSize: 35,fontWeight: FontWeight.w600),
+                      ),),
+                      SizedBox(height: 10,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

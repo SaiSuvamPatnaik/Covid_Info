@@ -3,6 +3,7 @@ import 'package:covid_infos/Basic_infos_about_Covid/General/Dateslot.dart';
 import 'package:covid_infos/ConvertDate/Conversion.dart';
 import 'package:covid_infos/Provider/Onsearch.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -160,9 +161,17 @@ class _vaccineState extends State<vaccine> {
                 :Text(""),
             Padding(
               padding: const EdgeInsets.fromLTRB(0,30,0,0),
-              child: Text("Get Vaccinated",style: TextStyle(fontSize: 35,fontFamily: "SurfingCapital",color: Colors.purple,fontWeight: FontWeight.w600,letterSpacing: 1),),
+              child: Text("Get Vaccinated",
+                style: GoogleFonts.lobster(
+                    textStyle: TextStyle(color: Colors.purple,fontSize: 50,shadows:[
+                      Shadow(
+                      blurRadius: 2.0,
+                      color: Colors.pink,
+                      offset: Offset(1.0, 1.0),
+                    ),
+                  ],)),
             ),
-          ],
+            )],
         ),
       ),
     );

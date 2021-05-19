@@ -14,7 +14,13 @@ class _contactsState extends State<contacts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 3,
+        leading: Icon(Icons.arrow_back,size: 30,color: Colors.white,),
+        title: Text("Emergency Contact",style: TextStyle(fontFamily: "Bosk",fontSize: 30,color: Colors.brown),),
+        centerTitle: true,
+      ),
       body: FutureBuilder(
         future: contactsno().contactno(),
         builder: (context,snapshot){
@@ -45,6 +51,10 @@ class _contactsState extends State<contacts> {
                             children: [
                               Text(decodedJson["data"]["contacts"]["regional"][index]["number"].toString(),style: TextStyle(fontSize: 15),),
                             ],
+                          ),
+                          trailing: Padding(
+                            padding: const EdgeInsets.fromLTRB(0,0,10,0),
+                            child: Icon(Icons.call,color:Colors.green,size: 25,),
                           ),
 
                         ),

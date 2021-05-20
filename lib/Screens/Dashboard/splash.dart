@@ -25,7 +25,7 @@ class _splashState extends State<splash> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(15,0,0,0),
-            child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/covidRed.png",scale: 0.9,),
+            child: Image.asset("Assets/Images/covidRed.png",scale: 0.9,),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15,0,0,0),

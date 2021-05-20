@@ -38,7 +38,7 @@ class _homepageState extends State<homepage> {
                     backgroundColor: Colors.white,
                     elevation: 0,
                     flexibleSpace: FlexibleSpaceBar(
-                      background: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/personFighting.png",
+                      background: Image.asset("Assets/Images/personFighting.png",
                           fit: BoxFit.cover,),
                     ),
                   ),
@@ -76,7 +76,7 @@ class _homepageState extends State<homepage> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(80,0,0,0),
-                                    child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/covidBlue.png",scale: 1.5,),
+                                    child: Image.asset("Assets/Images/covidBlue.png",scale: 1.5,),
                                   )
                                 ],
                               )
@@ -106,7 +106,7 @@ class _homepageState extends State<homepage> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(80,0,0,0),
-                                    child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/death.png",scale: 1.5,),
+                                    child: Image.asset("Assets/Images/death.png",scale: 1.5,),
                                   )
                                 ],
                               )
@@ -135,7 +135,7 @@ class _homepageState extends State<homepage> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(50,0,0,0),
-                                  child: Image.network("https://raw.githubusercontent.com/m-hamzashakeel/Covid19-Tracker-App/master/images/recover.png",scale: 1.5,),
+                                  child: Image.asset("Assets/Images/recover.png",scale: 1.5,),
                                 )
                               ],
                             ),

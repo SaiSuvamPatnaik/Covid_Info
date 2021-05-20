@@ -103,12 +103,15 @@ class _countryState extends State<country> {
                                 child: Padding(
                                   padding: const EdgeInsets.fromLTRB(4,12,12,8),
                                   child: ListTile(
-                                    leading: ClipOval(
-                                      child: Image.network(
-                                        decodedJson[index]["countryInfo"]["flag"],
-                                        width: 50,
-                                        height: 50,
-                                        fit: BoxFit.cover,
+                                    leading: Hero(
+                                      tag: decodedJson[index]["country"],
+                                      child: ClipOval(
+                                        child: Image.network(
+                                          decodedJson[index]["countryInfo"]["flag"],
+                                          width: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     title: Text(decodedJson[index]["country"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),

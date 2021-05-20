@@ -27,9 +27,12 @@ class _indivisualState extends State<indivisual> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0,30,0,0),
-              child: Image.network(decodedjson[index]["countryInfo"]["flag"],scale: 2,),
+            Hero(
+              tag: decodedjson[index]["country"],
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0,30,0,0),
+                child: Image.network(decodedjson[index]["countryInfo"]["flag"],scale: 2,),
+              ),
             ),
             SizedBox(height: 20,),
             decodedjson[index]["country"].length>16?SingleChildScrollView(

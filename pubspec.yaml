@@ -39,6 +39,7 @@ dependencies:
   url_launcher:
   awesome_dialog:
   google_fonts:
+  lottie:
 
 dev_dependencies:
   flutter_test:

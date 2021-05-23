@@ -68,20 +68,21 @@ class _dateslotState extends State<dateslot> {
                                   ),
                                   actions: [
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(0,0,15,25),
+                                      padding: const EdgeInsets.fromLTRB(170,0,15,25),
                                       child: Row(
                                         children: [
                                           GestureDetector(
                                               onTap:(){
                                                 Navigator.pop(context);
                                               },
-                                              child: Text("Cancel",style: TextStyle(fontSize: 19,color: Colors.red,fontWeight: FontWeight.w500),)),
+                                              child: Text("OK",style: TextStyle(fontSize: 19,color: Colors.blue,fontWeight: FontWeight.w500),)),
                                           SizedBox(width: 15,),
                                           GestureDetector(
                                               onTap:(){
                                                 Navigator.pop(context);
                                               },
-                                              child: Text("OK",style: TextStyle(fontSize: 19,color: Colors.blue,fontWeight: FontWeight.w500),)),
+                                              child: Text("Cancel",style: TextStyle(fontSize: 19,color: Colors.red,fontWeight: FontWeight.w500),)),
+
                                           SizedBox(width: 10,),
                                         ],
                                       ),

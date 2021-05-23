@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:covid_infos/DataFetching/countrywise.dart';
 import 'package:covid_infos/Provider/Onsearch.dart';
 import 'package:covid_infos/Screens/Covidcases/Indivisual.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+
 class country extends StatefulWidget {
   @override
   _countryState createState() => _countryState();
@@ -14,6 +16,7 @@ class country extends StatefulWidget {
 
 class _countryState extends State<country> {
   final fieldText = TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -106,11 +109,11 @@ class _countryState extends State<country> {
                                     leading: Hero(
                                       tag: decodedJson[index]["country"],
                                       child: ClipOval(
-                                        child: Image.network(
-                                          decodedJson[index]["countryInfo"]["flag"],
+                                        child: CachedNetworkImage(
                                           width: 50,
                                           height: 50,
                                           fit: BoxFit.cover,
+                                          imageUrl: decodedJson[index]["countryInfo"]["flag"],
                                         ),
                                       ),
                                     ),
@@ -146,6 +149,7 @@ class _countryState extends State<country> {
                                         height: 50,
                                         fit: BoxFit.cover,
                                       ),
+
                                     ),
                                     title: Text(decodedJson[data.countryfound1()]["country"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                                     subtitle: Row(

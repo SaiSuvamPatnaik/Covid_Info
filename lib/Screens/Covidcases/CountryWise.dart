@@ -143,14 +143,12 @@ class _countryState extends State<country> {
                                   padding: const EdgeInsets.fromLTRB(4,12,12,8),
                                   child: ListTile(
                                     leading: ClipOval(
-                                      child: Image.network(
-                                        decodedJson[data.countryfound1()]["countryInfo"]["flag"],
+                                      child: CachedNetworkImage(
                                         width: 50,
                                         height: 50,
                                         fit: BoxFit.cover,
-                                      ),
-
-                                    ),
+                                        imageUrl: decodedJson[index]["countryInfo"]["flag"],
+                                      ),                                    ),
                                     title: Text(decodedJson[data.countryfound1()]["country"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                                     subtitle: Row(
                                       children: [

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:covid_infos/DataFetching/hospitalbeds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -37,10 +38,11 @@ class _hospitalState extends State<hospital> {
                 return Column(
                   children: [
                     ExpansionTile(
-                      leading: Container(
-                        height: 45,
+                      leading: CachedNetworkImage(
                         width: 45,
-                        child: Image.network(Link(index)),
+                        height: 45,
+                        fit: BoxFit.cover,
+                        imageUrl: decodedJson[index]["countryInfo"]["flag"],
                       ),
                       title: Text(decodedJson["data"]["regional"][index]["state"],style: TextStyle(fontSize: 20),),
                       children: [

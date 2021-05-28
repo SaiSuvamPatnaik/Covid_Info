@@ -117,7 +117,7 @@ class _vaccineState extends State<vaccine> {
             pressed?Container(
               height: 300,
               child: ListView.builder(
-                  itemCount: infos["centers"].length,
+                  itemCount: infos==null?0:infos["centers"].length,
                   itemBuilder: (context,index){
                     return Center(
                         child: Column(

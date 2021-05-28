@@ -42,7 +42,7 @@ class _hospitalState extends State<hospital> {
                         width: 45,
                         height: 45,
                         fit: BoxFit.cover,
-                        imageUrl: decodedJson[index]["countryInfo"]["flag"],
+                        imageUrl: Link(index),
                       ),
                       title: Text(decodedJson["data"]["regional"][index]["state"],style: TextStyle(fontSize: 20),),
                       children: [

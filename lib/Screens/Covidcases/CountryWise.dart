@@ -147,7 +147,7 @@ class _countryState extends State<country> {
                                         width: 50,
                                         height: 50,
                                         fit: BoxFit.cover,
-                                        imageUrl: decodedJson[index]["countryInfo"]["flag"],
+                                        imageUrl: decodedJson[data.countryfound1()]["countryInfo"]["flag"],
                                       ),                                    ),
                                     title: Text(decodedJson[data.countryfound1()]["country"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                                     subtitle: Row(

@@ -145,27 +145,6 @@ class infos extends StatelessWidget {
               height: 200.0,
             ).w32(context).centered(),
           ].hStack(),
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(120,20,0,0),
-              child: RaisedButton(
-                color: Colors.blueAccent,
-                elevation: 5,
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => contacts()));
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(9),
-                  child: Text("CLICK",style: TextStyle(fontSize: 20,color: Colors.white),),
-                ),
-              ),
-            ),
-          ),
         ],
       ).p16().scrollVertical(),
     );

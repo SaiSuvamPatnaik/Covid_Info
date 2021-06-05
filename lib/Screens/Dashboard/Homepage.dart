@@ -1,11 +1,16 @@
 import 'dart:convert';
+import 'package:covid_infos/Basic_infos_about_Covid/General/Contacts.dart';
 import 'package:covid_infos/Basic_infos_about_Covid/General/Vaccine.dart';
+import 'package:covid_infos/Basic_infos_about_Covid/General/basicinfo.dart';
 import 'package:covid_infos/Basic_infos_about_Covid/General/funding.dart';
 import 'package:covid_infos/Basic_infos_about_Covid/General/govtinfo.dart';
 import 'package:covid_infos/Basic_infos_about_Covid/General/twittersearch.dart';
 import 'package:covid_infos/Basic_infos_about_Covid/Hospital/hospitals.dart';
 import 'package:covid_infos/DataFetching/Worlddata.dart';
 import 'package:covid_infos/Screens/Covidcases/CountryWise.dart';
+import 'package:covid_infos/Screens/Covidcases/statewise.dart';
+import 'package:covid_infos/Services/totalsample.dart';
+import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -340,6 +345,99 @@ class _homepageState extends State<homepage> {
                               ),
                             ],
                           ),
+                          SizedBox(height:5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => statewise()));
+                                },
+                                child: Card(
+                                  elevation: 10,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                            begin: Alignment.bottomRight,
+                                            end: Alignment.topLeft,
+                                            colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
+                                        border: Border.all(
+                                          color: Colors.black
+                                          ,
+                                        ),
+                                        borderRadius: BorderRadius.all(Radius.circular(20))
+                                    ),
+                                    height: 140,
+                                    width: 180,
+                                    child: Center(
+                                        child:
+                                        Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                                              child: Icon(Icons.phone_android,size: 30,color: Colors.white,),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(0,10,0,0),
+                                              child: Text("Daily Stats",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                            ),                                    ],
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => contacts()));
+                                },
+                                child: Card(
+                                  elevation: 10,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                            begin: Alignment.bottomRight,
+                                            end: Alignment.topLeft,
+                                            colors: [Color(0xFFeb3349),Color(0xFFf45c43)]),
+                                        color: Colors.red,
+                                        border: Border.all(
+                                          color: Colors.black,
+                                        ),
+                                        borderRadius: BorderRadius.all(Radius.circular(20))
+                                    ),
+                                    height: 140,
+                                    width: 180,
+                                    child: Center(
+                                        child:
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(15,0,0,0),
+                                              child: Icon(Icons.money,size: 30,color: Colors.white,),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(5,5,0,0),
+                                              child: Text("Contacts",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                            ),
+
+                                          ],
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           SizedBox(height: 30,),
                           Text("VERSION - 1.1.1",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
                           SizedBox(height: 10,),
@@ -353,13 +451,31 @@ class _homepageState extends State<homepage> {
 
               ),
             ),
-            floatingActionButton: FloatingActionButton(
-              child: IconButton(onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => country()));
-                },
-                  icon: Icon(Icons.flag,size: 30,),),
+            floatingActionButton: FabCircularMenu(
+                ringWidth: 70,
+                fabElevation: 10,
+                fabOpenIcon: Icon(Icons.menu,color: Colors.white,size: 27,),
+                fabCloseIcon: Icon(Icons.close,color: Colors.white,size: 27,),
+                fabColor: Colors.blueAccent,
+                ringColor: Colors.redAccent,
+                ringDiameter: 220,
+                children: <Widget>[
+                  IconButton(icon: Icon(Icons.people,color: Colors.white,size: 35,), onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => totalsample()));
+                  }),
+                  IconButton(icon: Icon(Icons.flag,color: Colors.white,size: 35,), onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => country()));
+                  }),
+                  IconButton(icon: Icon(Icons.info,color: Colors.white,size: 35), onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => infos()));
+                  }),
+                ]
             ),
           );
 

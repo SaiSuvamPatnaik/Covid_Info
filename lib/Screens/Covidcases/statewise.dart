@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:covid_infos/DataFetching/Statedatas.dart';
 import 'package:covid_infos/Screens/Covidcases/Indivisual_State.dart';
+import 'package:csv/csv.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +14,23 @@ class statewise extends StatefulWidget {
 }
 
 class _statewiseState extends State<statewise> {
+  List _data = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadCSV();
+  }
+  void loadCSV() async {
+    final _rawData = await rootBundle.loadString("Assets/CSV/state_wise_daily.csv");
+    List _listData = CsvToListConverter().convert(_rawData);
+    setState(() {
+      for (int i=0;i<_listData.length;i++){
+        _data.add(_listData[i]);
+      }
+    });
+    print(_data[1344]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,27 +75,28 @@ class _statewiseState extends State<statewise> {
                             padding: const EdgeInsets.fromLTRB(8,3,8,3),
                             child: ListTile(
                               leading: CircleAvatar(
-                                radius: 25,
+                                radius: 22,
                                 child: Text(datas1[index],),
                               ),
                               title: Text(datas2[index],style: GoogleFonts.roboto(
-                                textStyle: TextStyle(color: Colors.black,fontSize: 20,),
+                                textStyle: TextStyle(color: Colors.black,fontSize: 18),
                               ),),
                               trailing: IconButton(
                                 onPressed: (){
                                   String logo;
+                                  List dailydata;
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index])));
+                                        MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index],dailydata:_data)));
                                 },
-                                icon: Icon(Icons.info_outline,color: Colors.black,size: 30,),
+                                icon: Icon(Icons.info_outline,color: Colors.black,size: 27,),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(50,0,50,0),
+                            padding: const EdgeInsets.fromLTRB(10,0,10,0),
                             child: Divider(
-                              thickness: 2,
+                              thickness: 1,
                             ),
                           )
                         ],

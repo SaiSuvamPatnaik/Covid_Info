@@ -1,4 +1,4 @@
-import 'package:covid_infos/Basic_infos_about_Covid/General/Contacts.dart';
+import 'package:covid_infos/Screens/Basic_infos_about_Covid/General/Contacts.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:covid_infos/Basic_infos_about_Covid/General/Dateslot.dart';
+import 'package:covid_infos/Screens/Basic_infos_about_Covid/General/Dateslot.dart';
 import 'package:covid_infos/ConvertDate/Conversion.dart';
 import 'package:covid_infos/Provider/Onsearch.dart';
 import 'package:flutter/material.dart';

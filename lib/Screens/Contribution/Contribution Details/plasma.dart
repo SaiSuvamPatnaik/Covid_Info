@@ -136,8 +136,7 @@ class _plasmaState extends State<plasma> {
                                         ): Text(" ",style: TextStyle(fontSize: 0),),
                                       SizedBox(height: 5,),
                                       Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Stack(
                                               children: [

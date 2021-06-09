@@ -15,9 +15,9 @@ class _cntbnpgState extends State<cntbnpg> {
     "Hospital bed info",
     "Medicine avlbl details",
   ];
-  String name,phone,alt_phone,msg,address=" ";
+  String name,phone,alt_phone,msg,address="No";
   String _currentSelectedValue;
-  bool showval=false;
+  bool showval=false,showval1=false;
   @override
   void initState() {
     // TODO: implement initState
@@ -229,6 +229,27 @@ class _cntbnpgState extends State<cntbnpg> {
                 ],
               ),
               SizedBox(height: 10,),
+              Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                    child: Checkbox(
+                      value: showval1,
+                      onChanged: (bool value1) {
+                        setState(() {
+                          showval1 = value1;
+                        });
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20,50,0,0),
+                    child: Text("I agree that that information provided is completely verified"
+                      ,style: TextStyle(fontSize: 14,fontWeight:FontWeight.w500,color: Colors.black),),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10,),
               Center(
                 child: SizedBox(
                   width: 100,
@@ -241,17 +262,31 @@ class _cntbnpgState extends State<cntbnpg> {
 
                     color: Colors.blueAccent,
                     onPressed: (){
-                      if(showval==true) {
+                      if(showval==true && showval1==true) {
                         Map data = {
                           "NAME":name,
                           "Phone":phone,
                           "Address":address,
+                          "Verified":"True",
                           "Alt Phone":alt_phone,
                           "Category":_currentSelectedValue,
                           "Message":msg
                         };
                         ref.child(_currentSelectedValue).push().set(data);
                       }
+                      if(showval==true && showval1==false) {
+                        Map data = {
+                          "NAME":name,
+                          "Phone":phone,
+                          "Address":address,
+                          "Verified":"False",
+                          "Alt Phone":alt_phone,
+                          "Category":_currentSelectedValue,
+                          "Message":msg
+                        };
+                        ref.child(_currentSelectedValue).push().set(data);
+                      }
+
                       else
                         print("AGREE TO THE CONDITION FIRST");
                     },

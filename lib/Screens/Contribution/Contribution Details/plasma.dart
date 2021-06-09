@@ -48,7 +48,7 @@ class _plasmaState extends State<plasma> {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.fromLTRB(40, 10, 10, 30),
+                                  const EdgeInsets.fromLTRB(40,0,10,5),
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -100,7 +100,7 @@ class _plasmaState extends State<plasma> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  item[index]["Address"]!=""
+                                  item[index]["Address"]!="No"
                                       ? Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
@@ -133,8 +133,8 @@ class _plasmaState extends State<plasma> {
                                               ],
                                             ),
                                           ],
-                                        ): Text("",style: TextStyle(fontSize: 0),),
-
+                                        ): Text(" ",style: TextStyle(fontSize: 0),),
+                                      SizedBox(height: 5,),
                                       Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -169,6 +169,30 @@ class _plasmaState extends State<plasma> {
                                             ),
                                           ],
                                         ),
+                                  Container(
+//                                    color: Colors.green,
+                                    height: 50,
+                                    width: MediaQuery.of(context).size.width-50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(0,0,20,0),
+                                      child: Container(
+                                        child: item[index]["Verified"]=="True"? Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text("Verified",style: TextStyle(color: Colors.blue[900],fontSize: 16,fontWeight: FontWeight.w600),),
+                                            Icon(Icons.verified,color: Colors.blue[900],)
+                                          ],
+                                        ):
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text("Not Verified",style: TextStyle(color: Colors.red[500],fontSize: 16,fontWeight: FontWeight.w600),),
+                                            Icon(Icons.cancel,color: Colors.red[500],)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             )

@@ -1,19 +1,29 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 class cntbnpg extends StatefulWidget {
   @override
   _cntbnpgState createState() => _cntbnpgState();
 }
 
 class _cntbnpgState extends State<cntbnpg> {
+  DatabaseReference ref;
   var _currencies = [
     "Info about Plasma avlbl",
     "Oxygen suppliers contact",
     "Hospital bed info",
     "Medicine avlbl details",
   ];
+  String name,phone,alt_phone,msg,address=" ";
   String _currentSelectedValue;
   bool showval=false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ref = FirebaseDatabase.instance.reference().child("Details");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +43,7 @@ class _cntbnpgState extends State<cntbnpg> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,20,0,0),
-                child: Text("Full Name*",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.w400),),
+                child: Text("Full Name*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(20,10,20,10),
@@ -51,11 +61,14 @@ class _cntbnpgState extends State<cntbnpg> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
+                  onChanged: (value1){
+                    name=value1;
+                  },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,20,0,0),
-                child: Text("Phone Number*",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.w400),),
+                child: Text("Phone Number*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(20,10,20,10),
@@ -73,11 +86,14 @@ class _cntbnpgState extends State<cntbnpg> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
+                  onChanged: (value2){
+                    phone=value2;
+                  },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,20,0,0),
-                child: Text("Alt Phone Number*",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.w400),),
+                child: Text("Alt Phone Number*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(20,10,20,10),
@@ -95,11 +111,39 @@ class _cntbnpgState extends State<cntbnpg> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
+                  onChanged: (value3){
+                    alt_phone=value3;
+                  },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,20,0,0),
-                child: Text("Category*",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.w400),),
+                child: Text("Address (optional)",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(20,10,20,10),
+                padding: EdgeInsets.fromLTRB(10,0,10,0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                      color: Colors.grey[400],// set border color
+                      width: 1.0),   // set border width
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(10.0)), // set rounded corner radius
+                ),
+                child: TextField(
+                  style: TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (value5){
+                    address=value5;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20,20,0,0),
+                child: Text("Category*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(10,10,10,0),
@@ -138,7 +182,7 @@ class _cntbnpgState extends State<cntbnpg> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,20,0,0),
-                child: Text("Message*",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.w400),),
+                child: Text("Message*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(20,10,20,10),
@@ -153,9 +197,15 @@ class _cntbnpgState extends State<cntbnpg> {
                 ),
                 child: TextField(
                   style: TextStyle(fontSize: 20),
+                  maxLines: null,
+                  maxLength: 200,
+                  maxLengthEnforced: true,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
+                  onChanged: (value4){
+                    msg=value4;
+                  },
                 ),
               ),
               Stack(
@@ -167,18 +217,49 @@ class _cntbnpgState extends State<cntbnpg> {
                       onChanged: (bool value) {
                         setState(() {
                           showval = value;
-                          print(showval);
                         });
                       },
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20,50,0,0),
-                    child: Text("I hereby agree to the Terms and Conditions of sharing this data publicly on this app in order to help the people who need it"
+                    child: Text("I hereby agree to the Terms and Conditions of sharing my data publicly on this app so that people can contact me for any help"
                       ,style: TextStyle(fontSize: 14,fontWeight:FontWeight.w500,color: Colors.black),),
                   ),
                 ],
-              )
+              ),
+              SizedBox(height: 10,),
+              Center(
+                child: SizedBox(
+                  width: 100,
+                  child: RaisedButton(
+                    padding: EdgeInsets.fromLTRB(0,10,0,10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+
+                    ),
+
+                    color: Colors.blueAccent,
+                    onPressed: (){
+                      if(showval==true) {
+                        Map data = {
+                          "NAME":name,
+                          "Phone":phone,
+                          "Address":address,
+                          "Alt Phone":alt_phone,
+                          "Category":_currentSelectedValue,
+                          "Message":msg
+                        };
+                        ref.child(_currentSelectedValue).push().set(data);
+                      }
+                      else
+                        print("AGREE TO THE CONDITION FIRST");
+                    },
+                    child: Text("Submit",style: TextStyle(color: Colors.white,fontSize: 18),),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20,),
             ],
           ),
         ),

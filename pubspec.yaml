@@ -43,6 +43,7 @@ dependencies:
   cached_network_image:
   csv:
   fl_chart:
+  firebase_database: ^6.0.0
 
 dev_dependencies:
   flutter_test:

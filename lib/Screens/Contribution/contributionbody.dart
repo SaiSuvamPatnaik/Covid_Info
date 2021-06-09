@@ -1,3 +1,7 @@
+import 'package:covid_infos/Screens/Contribution/Contribution%20Details/hospital.dart';
+import 'package:covid_infos/Screens/Contribution/Contribution%20Details/medicine.dart';
+import 'package:covid_infos/Screens/Contribution/Contribution%20Details/oxygen.dart';
+import 'package:covid_infos/Screens/Contribution/Contribution%20Details/plasma.dart';
 import 'package:covid_infos/Screens/Contribution/contributionpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,254 +15,231 @@ class _contributionbodyState extends State<contributionbody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.fromLTRB(0,50,0,0),
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(80,0,0,0),
-              child: Text("HELP ALL",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(170,0,0,0),
-              child: Text("SAVE ALL",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),),
-            ),
-            SizedBox(height: 15,),
-            Container(
-              height: MediaQuery.of(context).size.height-150,
-              child: Row(
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: Container(
-                          height: 300,
-                          child: SvgPicture.asset("Assets/Images/mask-man.svg"))),
-                  SingleChildScrollView(
-                    child: Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0,20,0,0),
-                              child: GestureDetector(
-                                onTap: (){
-                                },
-                                child: Card(
-                                  elevation: 10,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                            begin: Alignment.bottomRight,
-                                            end: Alignment.topLeft,
-                                            colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
-                                        border: Border.all(
-                                          color: Colors.black
-                                          ,
-                                        ),
-                                        borderRadius: BorderRadius.all(Radius.circular(20))
-                                    ),
-                                    height: 140,
-                                    width: 180,
-                                    child: Center(
-                                        child:
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                                              child: Icon(Icons.phone_android,size: 30,color: Colors.white,),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.fromLTRB(0,10,0,0),
-                                              child: Text("Plasma",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                            ),                                    ],
-                                        )),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: (){
-
-                              },
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.bottomRight,
-                                          end: Alignment.topLeft,
-                                          colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
-                                      border: Border.all(
-                                        color: Colors.black
-                                        ,
-                                      ),
-                                      borderRadius: BorderRadius.all(Radius.circular(20))
-                                  ),
-                                  height: 140,
-                                  width: 180,
-                                  child: Center(
-                                      child:
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                                            child: Icon(Icons.phone_android,size: 30,color: Colors.white,),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,10,0,0),
-                                            child: Text("Hospital",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                          ),                                    ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: (){
-//                          Navigator.push(
-//                              context,
-//                              MaterialPageRoute(builder: (context) => statewise()));
-                              },
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.bottomRight,
-                                          end: Alignment.topLeft,
-                                          colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
-                                      border: Border.all(
-                                        color: Colors.black
-                                        ,
-                                      ),
-                                      borderRadius: BorderRadius.all(Radius.circular(20))
-                                  ),
-                                  height: 140,
-                                  width: 180,
-                                  child: Center(
-                                      child:
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                                            child: Icon(Icons.phone_android,size: 30,color: Colors.white,),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,10,0,0),
-                                            child: Text("Oxygen",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                          ),                                    ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: (){
-//                          Navigator.push(
-//                              context,
-//                              MaterialPageRoute(builder: (context) => statewise()));
-                              },
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.bottomRight,
-                                          end: Alignment.topLeft,
-                                          colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
-                                      border: Border.all(
-                                        color: Colors.black
-                                        ,
-                                      ),
-                                      borderRadius: BorderRadius.all(Radius.circular(20))
-                                  ),
-                                  height: 140,
-                                  width: 180,
-                                  child: Center(
-                                      child:
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                                            child: Icon(Icons.phone_android,size: 30,color: Colors.white,),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,10,0,0),
-                                            child: Text("Medicine",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                          ),                                    ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: (){
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => cntbnpg()));
-                              },
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.bottomRight,
-                                          end: Alignment.topLeft,
-                                          colors: [Color(0xFF06beb6),Color(0xFF48b1bf)]),
-                                      border: Border.all(
-                                        color: Colors.black
-                                        ,
-                                      ),
-                                      borderRadius: BorderRadius.all(Radius.circular(20))
-                                  ),
-                                  height: 140,
-                                  width: 180,
-                                  child: Center(
-                                      child:
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                                            child: Icon(Icons.phone_android,size: 30,color: Colors.white,),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,10,0,0),
-                                            child: Text("Contribute",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
-                                          ),                                    ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20,)
-                          ],
-                        )
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Container(
+                  height: 200,
+                  width: 180,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                    child: SvgPicture.asset("Assets/Images/mask-man.svg"),
+                  )),
+              Container(
+                  width: 190,
+                  child: Text("HELP ALL SAVE ALL",style: TextStyle(fontSize: 39,fontWeight: FontWeight.bold,),))
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0,20,0,0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => plasma()));
+                  },
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                  )
-                ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Color(0xFF2193b0),Color(0xFF6dd5ed)]),
+
+                          border: Border.all(
+                            color: Colors.blueAccent,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
+                      ),
+                      height: 140,
+                      width: 180,
+                      child: Center(
+                          child:
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.flag,size: 35,color: Colors.white,),
+                              Text("Plasma",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
+                            ],
+                          )),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5,2,2,2),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => hosp()));
+                    },
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomRight,
+                                end: Alignment.topLeft,
+                                colors: [Color(0xFF02aab0),Color(0xFF00cdac)]),
+
+                            border: Border.all(
+                              color: Color.fromRGBO(10,190,60,1),
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        height: 140,
+                        width: 180,
+                        child: Center(
+                            child:
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.flag,size: 35,color: Colors.white,),
+                                Text("Hospital",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => oxygen()));
+                },
+                child: Card(
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Color(0xFFeb3349),Color(0xFFf45c43)]),
+                        border: Border.all(
+                          color: Color.fromRGBO(220,28,49,1),
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    height: 140,
+                    width: 180,
+                    child: Center(
+                        child:
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.flag,size: 35,color: Colors.white,),
+                            Text("Oxygen",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
+                          ],
+                        )),
+                  ),
+                ),
               ),
-            )
-          ],
-        ),
-      ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5,2,2,2),
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => medicine()));
+                  },
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomRight,
+                              end: Alignment.topLeft,
+                              colors: [Color(0xFF614385),Color(0xFF516395)]),
+
+                          border: Border.all(
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
+                      ),
+                      height: 140,
+                      width: 180,
+                      child: Center(
+                          child:
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.flag,size: 35,color: Colors.white,),
+                              Text("Medicine",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
+                            ],
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+          SizedBox(height: 10,),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => cntbnpg()));
+            },
+            child: Card(
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Color(0xFF2193b0),Color(0xFF6dd5ed)]),
+
+                    border: Border.all(
+                      color: Colors.blueAccent,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+                height: 140,
+                width: 180,
+                child: Center(
+                    child:
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.flag,size: 35,color: Colors.white,),
+                        Text("Contribute",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
+                      ],
+                    )),
+              ),
+            ),
+          ),
+
+        ],
+      )
     );
   }
 }

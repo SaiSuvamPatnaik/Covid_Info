@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class medicine extends StatefulWidget {
   @override
@@ -8,10 +9,13 @@ class medicine extends StatefulWidget {
 }
 
 class _medicineState extends State<medicine> {
+  List monthsinwords=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  String month;
   DatabaseReference ref1 = FirebaseDatabase.instance
       .reference()
       .child("Details")
       .child("Medicine avlbl details");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,172 +50,214 @@ class _medicineState extends State<medicine> {
                           ),
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(40, 0, 10, 5),
+                              padding:
+                              const EdgeInsets.fromLTRB(20,0,10,5),
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
+
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Phone No:",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: "Helvetica"),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Text(item[index]["Time"],style: TextStyle(fontSize: 18),)
                                       ),
-                                      SizedBox(
-                                        width: 5,
+                                      Expanded(
+                                          flex: 2,
+                                          child: Container(
+
+                                            child: Padding(
+                                              padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.place,),
+                                                  Container(
+                                                      width: 140,
+                                                      child: Text(item[index]["City"],style: TextStyle(fontSize: 18),))
+                                                ],
+                                              ),
+                                            ),
+                                          )
                                       ),
-                                      Text(
-                                        item[index]["Phone"],
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                        ),
-                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                                            child: Text(monthsinwords[item[index]["Month"]-1]+"-"+item[index]["Date"],
+                                              style: TextStyle(fontSize: 18),),
+                                          )
+                                      )
                                     ],
+                                  ),
+                                  SizedBox(
+                                    height:20,
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Phone No:",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: "Helvetica"),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        GestureDetector(
+                                          onTap: (){
+                                            _makePhoneCall("tel:"+"${item[index]["Phone"]}");
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(3,0,0,0),
+                                            child: Text(
+                                              item[index]["Phone"],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.blue,
+                                                decoration: TextDecoration.underline,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Alt Phone:",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: "Helvetica"),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        item[index]["Alt Phone"],
-                                        style: TextStyle(
-                                          fontSize: 20,
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Alt Phone:",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: "Helvetica"),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  item[index]["Address"] != "No"
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Stack(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          13, 0, 0, 0),
-                                                  child: Text(
-                                                    "Address:",
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          100, 2, 0, 0),
-                                                  child: Container(
-                                                      width: 220,
-                                                      child: Text(
-                                                        item[index]["Address"],
-                                                        style: TextStyle(
-                                                          fontSize: 20,
-                                                        ),
-                                                      )),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      : Text(
-                                          "",
-                                          style: TextStyle(fontSize: 0),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                  SizedBox(height: 5,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                6, 0, 0, 0),
+                                        GestureDetector(
+                                          onTap: (){
+                                            _makePhoneCall("tel:"+"${item[index]["Alt Phone"]}");
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(3,0,0,0),
                                             child: Text(
-                                              "Message:",
+                                              item[index]["Alt Phone"],
                                               style: TextStyle(
-                                                fontSize: 20,
+                                                  fontSize: 20,
+                                                  decoration: TextDecoration.underline,
+                                                  color: Colors.blue
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                100, 2, 0, 0),
-                                            child: Container(
-                                                width: 220,
-                                                child: Text(
-                                                  item[index]["Message"],
-                                                  style: TextStyle(
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(1,0,0,0),
+                                              child: Text(
+                                                "Address  :",
+                                                style: TextStyle(
                                                     fontSize: 20,
-                                                  ),
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                                    fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.fromLTRB(
+                                                  100, 2, 0, 0),
+                                              child: Container(
+                                                  width: 220,
+                                                  child: Text(
+                                                    item[index]["Address"],
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                    ),
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 5,),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            Text(
+                                              "Message :",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.fromLTRB(
+                                                  100, 2, 0, 0),
+                                              child: Container(
+                                                  width: 220,
+                                                  child: Text(
+                                                    item[index]["Message"],
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                    ),
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   Container(
 //                                    color: Colors.green,
                                     height: 50,
-                                    width:
-                                        MediaQuery.of(context).size.width - 50,
+                                    width: MediaQuery.of(context).size.width-50,
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          0, 0, 20, 0),
+                                      padding: const EdgeInsets.fromLTRB(0,0,20,0),
                                       child: Container(
-                                        child: item[index]["Verified"] == "True"
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    "Verified",
-                                                    style: TextStyle(
-                                                        color: Colors.blue[900],
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  ),
-                                                  Icon(
-                                                    Icons.verified,
-                                                    color: Colors.blue[900],
-                                                  )
-                                                ],
-                                              )
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    "Not Verified",
-                                                    style: TextStyle(
-                                                        color: Colors.red[500],
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  ),
-                                                  Icon(
-                                                    Icons.cancel,
-                                                    color: Colors.red[500],
-                                                  )
-                                                ],
-                                              ),
+                                        child: item[index]["Verified"]=="True"? Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text("Verified",style: TextStyle(color: Colors.green,fontSize: 16,fontWeight: FontWeight.w600),),
+                                            Icon(Icons.verified,color: Colors.green,)
+                                          ],
+                                        ):
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text("Not Verified",style: TextStyle(color: Colors.red[500],fontSize: 16,fontWeight: FontWeight.w600),),
+                                            Icon(Icons.cancel,color: Colors.red[500],)
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )
@@ -235,22 +281,26 @@ class _medicineState extends State<medicine> {
               return Scaffold(
                   body: Center(
                       child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      height: 300,
-                      child: SvgPicture.asset("Assets/Images/no_data.svg")),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Text(
-                    "NO DATA FOUND",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: 300,
+                              child: SvgPicture.asset("Assets/Images/no_data.svg")),
+                          SizedBox(height: 35,),
+                          Text("NO DATA FOUND",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)
+                        ],
+                      )
                   )
-                ],
-              )));
+              );
             }
           }),
     );
+  }
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -15,7 +15,7 @@ class _cntbnpgState extends State<cntbnpg> {
     "Hospital bed info",
     "Medicine avlbl details",
   ];
-  String name,phone,alt_phone,msg,address="No";
+  String name,phone,alt_phone,msg,address,city;
   String _currentSelectedValue;
   bool showval=false,showval1=false;
   @override
@@ -118,7 +118,7 @@ class _cntbnpgState extends State<cntbnpg> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,20,0,0),
-                child: Text("Address (optional)",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
+                child: Text("Address*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(20,10,20,10),
@@ -143,6 +143,31 @@ class _cntbnpgState extends State<cntbnpg> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,20,0,0),
+                child: Text("City*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(20,10,20,10),
+                padding: EdgeInsets.fromLTRB(10,0,10,0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                      color: Colors.grey[400],// set border color
+                      width: 1.0),   // set border width
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(10.0)), // set rounded corner radius
+                ),
+                child: TextField(
+                  style: TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (value8){
+                    city=value8;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20,20,0,0),
                 child: Text("Category*",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w400),),
               ),
               Container(
@@ -154,7 +179,7 @@ class _cntbnpgState extends State<cntbnpg> {
                     return InputDecorator(
                       decoration: InputDecoration(
                           errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
-                          hintText: 'Please select expense',
+                          hintText: 'Select Category',
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
                       isEmpty: _currentSelectedValue == '',
                       child: DropdownButtonHideUnderline(
@@ -232,7 +257,7 @@ class _cntbnpgState extends State<cntbnpg> {
               Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                    padding: const EdgeInsets.fromLTRB(10,0,0,0),
                     child: Checkbox(
                       value: showval1,
                       onChanged: (bool value1) {
@@ -243,8 +268,8 @@ class _cntbnpgState extends State<cntbnpg> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20,50,0,0),
-                    child: Text("I agree that that information provided is completely verified"
+                    padding: const EdgeInsets.fromLTRB(20,40,0,0),
+                    child: Text("I agree that the information given is completely verified"
                       ,style: TextStyle(fontSize: 14,fontWeight:FontWeight.w500,color: Colors.black),),
                   ),
                 ],
@@ -263,11 +288,16 @@ class _cntbnpgState extends State<cntbnpg> {
                     color: Colors.blueAccent,
                     onPressed: (){
                       if(showval==true && showval1==true) {
+                        DateTime now = DateTime.now();
                         Map data = {
                           "NAME":name,
                           "Phone":phone,
                           "Address":address,
                           "Verified":"True",
+                          "Time":now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString(),
+                          "Date":now.day.toString(),
+                          "Month":now.month,
+                          "City":city,
                           "Alt Phone":alt_phone,
                           "Category":_currentSelectedValue,
                           "Message":msg
@@ -275,11 +305,16 @@ class _cntbnpgState extends State<cntbnpg> {
                         ref.child(_currentSelectedValue).push().set(data);
                       }
                       if(showval==true && showval1==false) {
+                        DateTime now = DateTime.now();
                         Map data = {
                           "NAME":name,
                           "Phone":phone,
                           "Address":address,
                           "Verified":"False",
+                          "Time":now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString(),
+                          "Date":now.day.toString(),
+                          "Month":now.month,
+                          "City":city,
                           "Alt Phone":alt_phone,
                           "Category":_currentSelectedValue,
                           "Message":msg

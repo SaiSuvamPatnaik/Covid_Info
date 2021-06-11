@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:covid_infos/Screens/Dashboard/Homepage.dart';
+import 'package:covid_infos/Screens/Navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lottie/lottie.dart';
@@ -17,7 +18,7 @@ class _splashState extends State<splash> {
     Timer(Duration(seconds: 6),()=>
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => homepage())));
+            MaterialPageRoute(builder: (context) => Navigation())));
   }
   @override
   Widget build(BuildContext context) {

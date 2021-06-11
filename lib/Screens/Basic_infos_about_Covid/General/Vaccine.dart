@@ -17,9 +17,10 @@ class vaccine extends StatefulWidget {
 class _vaccineState extends State<vaccine> {
   DateTime _selectedDate;
   String date1,city;
-  int difference;
+  int difference,statesid,districtid;
   bool pressed;
-  var infos;
+  var infos,infos1,infos2;
+
   Future getData(String finaldate, String city) async{
     String myUrl="https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${city}&date=${finaldate}";
     var req = await http.get(myUrl);
@@ -27,14 +28,50 @@ class _vaccineState extends State<vaccine> {
       infos = json.decode(req.body);
     });
   }
+
+  Future getStateData() async{
+    String myUrl="https://cdn-api.co-vin.in/api/v2/admin/location/states";
+    var req1 = await http.get(myUrl);
+    setState(() {
+      infos1 = json.decode(req1.body);
+    });
+  }
+
+  Future getdistrictdata(int statesid, String converteddate) async{
+    String myUrl="https://cdn-api.co-vin.in/api/v2/admin/location/districts/${statesid}";
+    var req1 = await http.get(myUrl);
+    setState(() {
+      infos2 = json.decode(req1.body);
+    });
+    for (int i=0;i<infos2["districts"].length;i++){
+      if (_textEditingController3.text==infos2["districts"][i]["district_name"]){
+        districtid=infos2["districts"][i]["district_id"];
+      }
+    }
+    getvaccinedetails(districtid,converteddate);
+  }
+
+  Future getvaccinedetails(int districtid, String converteddate) async{
+    String myUrl="https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${districtid}&date=${converteddate}";
+    var req1 = await http.get(myUrl);
+    setState(() {
+      infos = json.decode(req1.body);
+    });
+    print(infos);
+  }
+
   TextEditingController _textEditingController = TextEditingController();
   TextEditingController _textEditingController1 = TextEditingController();
+  TextEditingController _textEditingController2 = TextEditingController();
+  TextEditingController _textEditingController3 = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     pressed=false;
+    getStateData();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -53,7 +90,7 @@ class _vaccineState extends State<vaccine> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(50,15,50,5),
+              padding: const EdgeInsets.fromLTRB(50,15,50,0),
               child: TextField(
                 focusNode: AlwaysDisabledFocusNode(),
                 decoration: InputDecoration(
@@ -72,7 +109,7 @@ class _vaccineState extends State<vaccine> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(50,25,50,5),
+              padding: const EdgeInsets.fromLTRB(50,10,50,5),
               child: TextField(
                 decoration: InputDecoration(
                   labelText: ("Enter Pincode"),
@@ -88,6 +125,41 @@ class _vaccineState extends State<vaccine> {
                 controller: _textEditingController1,style: TextStyle(fontSize: 20),
               ),
             ),
+            SizedBox(height: 10,),
+            Text("OR",style: TextStyle(fontSize: 25),),
+            SizedBox(height: 10,),
+            Row(
+              children: [
+                SizedBox(width: 10,),
+                Expanded(
+                  flex: 1,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: ("State"),
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.location_city,size: 30,color: Colors.blueAccent,),
+                      filled: true,
+                    ),
+                    controller: _textEditingController2,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                SizedBox(width: 10,),
+                Expanded(
+                  flex: 1,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: ("District"),
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.location_city,size: 30,color: Colors.blueAccent,),
+                      filled: true,
+                    ),
+                    controller: _textEditingController3,style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                SizedBox(width: 10,),
+              ],
+            ),
             InkWell(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20,10,0,0),
@@ -98,7 +170,19 @@ class _vaccineState extends State<vaccine> {
                     String date=_textEditingController.text.replaceAll(" ","");
                     String date1 = date.replaceAll(",","");
                     String converteddate = Converteddata1(date1);
-                    getData(converteddate,city);
+                    if(_textEditingController1.text.isEmpty==true){
+                      for (int i=0;i<infos1["states"].length;i++){
+                        if(_textEditingController2.text==infos1["states"][i]["state_name"]){
+                          setState(() {
+                            statesid=infos1["states"][i]["state_id"];
+                          });
+                          getdistrictdata(statesid,converteddate);
+                        }
+                      }
+                    }
+                    if(_textEditingController1.text.isEmpty==false){
+                      getData(converteddate,city);
+                    }
                     setState(() {
                       pressed=true;
                     });
@@ -115,7 +199,7 @@ class _vaccineState extends State<vaccine> {
             ),
             SizedBox(height: 10,),
             pressed?Container(
-              height: 300,
+              height: 280,
               child: ListView.builder(
                   itemCount: infos==null?0:infos["centers"].length,
                   itemBuilder: (context,index){
@@ -158,18 +242,16 @@ class _vaccineState extends State<vaccine> {
                   }),
                 )
                 :Text(""),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0,30,0,0),
-              child: Text("Get Vaccinated",
-                style: GoogleFonts.lobster(
-                    textStyle: TextStyle(color: Colors.purple,fontSize: 50,shadows:[
-                      Shadow(
-                      blurRadius: 2.0,
-                      color: Colors.pink,
-                      offset: Offset(1.0, 1.0),
-                    ),
-                  ],)),
-            ),
+            SizedBox(height: 10,),
+            Text("Get Vaccinated",
+              style: GoogleFonts.lobster(
+                  textStyle: TextStyle(color: Colors.purple,fontSize: 50,shadows:[
+                    Shadow(
+                    blurRadius: 2.0,
+                    color: Colors.pink,
+                    offset: Offset(1.0, 1.0),
+                  ),
+                ],)),
             )],
         ),
       ),

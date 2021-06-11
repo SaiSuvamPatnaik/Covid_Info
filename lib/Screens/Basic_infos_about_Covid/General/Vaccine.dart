@@ -231,7 +231,7 @@ class _vaccineState extends State<vaccine> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(right: 30,left: 70),
+                              padding: EdgeInsets.only(right: 30,left: 70),
                               child: Divider(
                                 thickness: 1,
                               ),

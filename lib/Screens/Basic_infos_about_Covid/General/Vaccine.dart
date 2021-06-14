@@ -57,7 +57,7 @@ class _vaccineState extends State<vaccine> {
     setState(() {
       infos = json.decode(req1.body);
     });
-    print(infos);
+
   }
 
   TextEditingController _textEditingController = TextEditingController();
@@ -76,6 +76,7 @@ class _vaccineState extends State<vaccine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 3,

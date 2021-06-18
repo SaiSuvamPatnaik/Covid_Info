@@ -17,8 +17,21 @@ class _plasmaState extends State<plasma> {
       .child("Info about Plasma avlbl");
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Container(
+              margin: EdgeInsets.fromLTRB(0,0,20,0),
+              child: Icon(Icons.notifications))
+        ],
+      ),
       body: StreamBuilder(
           stream: ref1.onValue,
           builder: (context, snap) {

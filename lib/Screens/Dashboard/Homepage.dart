@@ -99,17 +99,18 @@ class _homepageState extends State<homepage> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.fromLTRB(30,40,0,0),
-                                                child: Text(worldstats[index]["text1"],style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
-                                              ),
-                                              Text(decodedJson[worldstats[index]["text2"]].toString(),style: TextStyle(fontSize: 23,color: Colors.white),)
-                                            ],
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(20,40,0,0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(worldstats[index]["text1"],style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
+                                                Text(decodedJson[worldstats[index]["text2"]].toString(),style: TextStyle(fontSize: 23,color: Colors.white),)
+                                              ],
+                                            ),
                                           ),
                                           Padding(
-                                            padding: index<2?EdgeInsets.fromLTRB(70,0,0,0):EdgeInsets.fromLTRB(50,0,0,0),
+                                            padding: index<2?EdgeInsets.fromLTRB(80,0,0,0):EdgeInsets.fromLTRB(50,0,0,0),
                                             child: Image.asset(worldstats[index]["image"],scale: 1.5,),
                                           )
                                         ],
@@ -517,17 +518,18 @@ class _homepageState extends State<homepage> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.fromLTRB(30,40,0,0),
-                                                child: Text(worldstats[index]["text1"],style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
-                                              ),
-                                              Text(index==0?"178207832":index==1?"3858077":"162716868",style: TextStyle(fontSize: 23,color: Colors.white),)
-                                            ],
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(20,40,0,0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(worldstats[index]["text1"],style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
+                                                Text(index==0?"178207832":index==1?"3858077":"162716868",style: TextStyle(fontSize: 23,color: Colors.white),)
+                                              ],
+                                            ),
                                           ),
                                           Padding(
-                                            padding: index<2?EdgeInsets.fromLTRB(70,0,0,0):EdgeInsets.fromLTRB(50,0,0,0),
+                                            padding: index<2?EdgeInsets.fromLTRB(80,0,0,0):EdgeInsets.fromLTRB(50,0,0,0),
                                             child: Image.asset(worldstats[index]["image"],scale: 1.5,),
                                           )
                                         ],

@@ -160,34 +160,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
     });
 
-
-
-
-
-
-
-
-
-
-
-//          if (prefs.getInt("oldLength")!=prefs.getInt("newLength")){
-//        flutterLocalNotificationsPlugin.show(
-//            0,
-//            "Value changed",
-//            "Open the app. Vaccine center added",
-//            NotificationDetails(
-//                android: AndroidNotificationDetails(
-//                    channel.id,
-//                    channel.name,
-//                    channel.description,
-//                    importance: Importance.high,
-//                    color: Colors.blue,
-//                    playSound: true,
-//                    icon: '@mipmap/ic_launcher'
-//                )
-//            )
-//        );
-//      }
   }
   List<Map<dynamic, dynamic>> onboardingData = [
     {
@@ -203,7 +175,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     {
       "text1": "SHARE INFOS",
       "text2":
-      "Help other patients by sharing important informations about Beds,Oxygen,etc",
+      "Help other patients by sharing important informations",
       "image": "Assets/Images/doctors2.svg"
     },
 

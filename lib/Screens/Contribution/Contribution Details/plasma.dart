@@ -25,13 +25,6 @@ class _plasmaState extends State<plasma> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Container(
-              margin: EdgeInsets.fromLTRB(0,0,20,0),
-              child: Icon(Icons.notifications))
-        ],
-      ),
       body: StreamBuilder(
           stream: ref1.onValue,
           builder: (context, snap) {
@@ -192,7 +185,7 @@ class _plasmaState extends State<plasma> {
                                                   Padding(
                                                     padding: const EdgeInsets.fromLTRB(1,0,0,0),
                                                     child: Text(
-                                                      "Address  :",
+                                                      "Address:",
                                                       style: TextStyle(
                                                         fontSize: 20,
                                                         fontWeight: FontWeight.bold
@@ -226,7 +219,7 @@ class _plasmaState extends State<plasma> {
                                               Stack(
                                                 children: [
                                                   Text(
-                                                    "Message :",
+                                                    "Message:",
                                                     style: TextStyle(
                                                       fontSize: 20,
                                                         fontWeight: FontWeight.bold

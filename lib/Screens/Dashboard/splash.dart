@@ -1,6 +1,29 @@
 import 'package:covid_infos/Screens/Navigation.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel',
+    'High Importance Notifications',
+    'This Channel is used for important notification',
+    importance: Importance.high,
+    playSound: true
+);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async{
+  await Firebase.initializeApp();
+  print("A BG Message just showed up : ${message.messageId}");
+}
+
+
 
 class OnboardingPage extends StatefulWidget {
   @override
@@ -9,6 +32,163 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   int currentPage = 0;
+  List data1=[];
+  List data2=[];
+  List data3=[];
+  List data4=[];
+  String str="";
+  DatabaseReference ref = FirebaseDatabase().reference().child("Details");
+  void initState() {
+    super.initState();
+    getdata();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message)
+    {
+      RemoteNotification notification=message.notification;
+      AndroidNotification android = message.notification?.android;
+      if (notification!=null && android!=null){
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+                android: AndroidNotificationDetails(
+                    channel.id,
+                    channel.name,
+                    channel.description,
+                    color: Colors.blue,
+                    playSound: true,
+                    icon: '@mipmap/ic_launcher'
+                )
+            )
+        );
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message)
+    {
+      print("A New onMessage opened app was published");
+      RemoteNotification notification = message.notification;
+      AndroidNotification android = message.notification?.android;
+      if(notification !=null && android!=null){
+        showDialog(
+            context: context,
+            builder: (_){
+              return AlertDialog(
+                title: Text(notification.title??""),
+                content: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(notification.body??"")
+                    ],
+                  ),
+                ),
+
+              );
+            }
+        );
+      }
+    });
+  }
+
+  getdata() async{
+    _loadCSV();
+  }
+  void _loadCSV() async {
+    var prefs,prefs1,prefs2,prefs3;
+    ref.child("Hospital bed info").once().then((DataSnapshot snapshot) async {
+      data1.add(snapshot.value);
+      prefs=await SharedPreferences.getInstance();
+      await prefs.setInt("oldLength",prefs.getInt("newLength")??0);
+      await prefs.setInt("newLength",data1[0].length);
+      print("Hospital bed info "+prefs.getInt("newLength").toString());
+      print("Hospital bed info "+prefs.getInt("oldLength").toString());
+      ref.child("Info about Plasma avlbl").once().then((DataSnapshot snapshot) async {
+        data2.add(snapshot.value);
+        prefs1=await SharedPreferences.getInstance();
+        await prefs1.setInt("oldLength1",prefs1.getInt("newLength1")??0);
+        await prefs1.setInt("newLength1",data2[0].length);
+        print("Plasma info "+prefs1.getInt("newLength1").toString());
+        print("Plasma info "+prefs1.getInt("oldLength1").toString());
+        ref.child("Medicine avlbl details").once().then((DataSnapshot snapshot) async {
+          data3.add(snapshot.value);
+          prefs2=await SharedPreferences.getInstance();
+          await prefs2.setInt("oldLength2",prefs2.getInt("newLength2")??0);
+          await prefs2.setInt("newLength2",data3[0].length);
+          print("Medicine info "+prefs2.getInt("newLength2").toString());
+          print("Medicine info "+prefs2.getInt("oldLength2").toString());
+          ref.child("Oxygen suppliers contact").once().then((DataSnapshot snapshot) async {
+            data4.add(snapshot.value);
+            prefs3=await SharedPreferences.getInstance();
+            await prefs3.setInt("oldLength3",prefs3.getInt("newLength3")??0);
+            await prefs3.setInt("newLength3",data4[0].length);
+            print("Oxygen info "+prefs3.getInt("newLength3").toString());
+            print("Oxygen info "+prefs3.getInt("oldLength3").toString());
+            if(prefs.getInt("oldLength")!=prefs.getInt("newLength")){
+              str=str+"Hospital-Bed, ";
+            }
+            if(prefs1.getInt("oldLength1")!=prefs1.getInt("newLength1")){
+              str=str+"Plasma, ";
+            }
+            if(prefs2.getInt("oldLength2")!=prefs2.getInt("newLength2")){
+              str=str+"Medicine avlbl, ";
+            }
+            if(prefs3.getInt("oldLength3")!=prefs3.getInt("newLength3")){
+              str=str+"Oxygen cylinder, ";
+            }
+            if (str.isEmpty==false)
+            {
+              flutterLocalNotificationsPlugin.show(
+                  0,
+                  "Value changed",
+                  "Someone added information about ${str}. Do check the contribution section ...",
+                  NotificationDetails(
+                      android: AndroidNotificationDetails(
+                          channel.id,
+                          channel.name,
+                          channel.description,
+                          importance: Importance.high,
+                          color: Colors.blue,
+                          playSound: true,
+                          icon: '@mipmap/ic_launcher'
+                      )
+                  )
+              );
+            }
+          });
+        });
+      });
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+//          if (prefs.getInt("oldLength")!=prefs.getInt("newLength")){
+//        flutterLocalNotificationsPlugin.show(
+//            0,
+//            "Value changed",
+//            "Open the app. Vaccine center added",
+//            NotificationDetails(
+//                android: AndroidNotificationDetails(
+//                    channel.id,
+//                    channel.name,
+//                    channel.description,
+//                    importance: Importance.high,
+//                    color: Colors.blue,
+//                    playSound: true,
+//                    icon: '@mipmap/ic_launcher'
+//                )
+//            )
+//        );
+//      }
+  }
   List<Map<dynamic, dynamic>> onboardingData = [
     {
       "text1": "REAL TIME UPDATE",
@@ -26,6 +206,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       "Help other patients by sharing important informations about Beds,Oxygen,etc",
       "image": "Assets/Images/doctors2.svg"
     },
+
   ];
   @override
   Widget build(BuildContext context) {
@@ -146,57 +327,3 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 }
 
-
-
-
-
-
-
-
-//import 'dart:async';
-//import 'dart:io';
-//import 'package:covid_infos/Screens/Dashboard/Homepage.dart';
-//import 'package:covid_infos/Screens/Navigation.dart';
-//import 'package:flutter/material.dart';
-//import 'package:flutter_spinkit/flutter_spinkit.dart';
-//import 'package:lottie/lottie.dart';
-//class splash extends StatefulWidget {
-//  @override
-//  _splashState createState() => _splashState();
-//}
-//
-//class _splashState extends State<splash> {
-//  @override
-//  void initState() {
-//    // TODO: implement initState
-//    super.initState();
-//    Timer(Duration(seconds: 6),()=>
-//        Navigator.push(
-//            context,
-//            MaterialPageRoute(builder: (context) => Navigation())));
-//  }
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      body: Column(
-//        mainAxisAlignment: MainAxisAlignment.center,
-//        children: [
-//          Padding(
-//            padding: const EdgeInsets.fromLTRB(15,0,0,20),
-//            child: Container(
-//                height: 180,
-//                width: 180,
-//                child: Lottie.network("https://assets5.lottiefiles.com/packages/lf20_pKaMGF.json"))
-//          ),
-//          Padding(
-//            padding: const EdgeInsets.fromLTRB(15,0,0,0),
-//            child: SpinKitPouringHourglass(color: Colors.black,size: 70,),
-//          ),
-//          SizedBox(height: 30,),
-//          Text("Stay Indoor | Stay Safe",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),)
-//        ],
-//      ),
-//
-//    );
-//  }
-//}

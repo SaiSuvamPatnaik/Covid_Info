@@ -86,7 +86,6 @@ class _homepageState extends State<homepage> {
                                 itemCount: 3,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context,index){
-                                  print(worldstats[index]["text2"]);
                                   return Container(
                                       height: 130,
                                       margin: EdgeInsets.fromLTRB(10,0,10,0),

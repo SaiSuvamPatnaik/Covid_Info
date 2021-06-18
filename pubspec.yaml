@@ -45,6 +45,10 @@ dependencies:
   fl_chart:
   firebase_database: ^6.0.0
   fancy_bottom_navigation:
+  firebase_messaging:
+  flutter_local_notifications:
+  firebase_core:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

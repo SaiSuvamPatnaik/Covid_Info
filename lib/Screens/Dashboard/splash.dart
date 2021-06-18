@@ -23,7 +23,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     {
       "text1": "SHARE INFOS",
       "text2":
-      "Help other patients by sharing important informations about beds,oxygen cylinder,etc",
+      "Help other patients by sharing important informations about Beds,Oxygen,etc",
       "image": "Assets/Images/doctors2.svg"
     },
   ];
@@ -90,13 +90,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text(
-                            onboardingData[currentPage]["text2"],
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width-20,
+                            child: Text(
+                              onboardingData[currentPage]["text2"],
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                         Expanded(

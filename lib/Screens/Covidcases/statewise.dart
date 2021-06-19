@@ -7,7 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+
 class statewise extends StatefulWidget {
   @override
   _statewiseState createState() => _statewiseState();
@@ -29,7 +29,6 @@ class _statewiseState extends State<statewise> {
         _data.add(_listData[i]);
       }
     });
-    print(_data[1344]);
   }
 
   @override

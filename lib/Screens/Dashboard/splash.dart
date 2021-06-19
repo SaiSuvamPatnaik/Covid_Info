@@ -100,29 +100,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
       prefs=await SharedPreferences.getInstance();
       await prefs.setInt("oldLength",prefs.getInt("newLength")??0);
       await prefs.setInt("newLength",data1[0].length);
-      print("Hospital bed info "+prefs.getInt("newLength").toString());
-      print("Hospital bed info "+prefs.getInt("oldLength").toString());
       ref.child("Info about Plasma avlbl").once().then((DataSnapshot snapshot) async {
         data2.add(snapshot.value);
         prefs1=await SharedPreferences.getInstance();
         await prefs1.setInt("oldLength1",prefs1.getInt("newLength1")??0);
         await prefs1.setInt("newLength1",data2[0].length);
-        print("Plasma info "+prefs1.getInt("newLength1").toString());
-        print("Plasma info "+prefs1.getInt("oldLength1").toString());
         ref.child("Medicine avlbl details").once().then((DataSnapshot snapshot) async {
           data3.add(snapshot.value);
           prefs2=await SharedPreferences.getInstance();
           await prefs2.setInt("oldLength2",prefs2.getInt("newLength2")??0);
           await prefs2.setInt("newLength2",data3[0].length);
-          print("Medicine info "+prefs2.getInt("newLength2").toString());
-          print("Medicine info "+prefs2.getInt("oldLength2").toString());
           ref.child("Oxygen suppliers contact").once().then((DataSnapshot snapshot) async {
             data4.add(snapshot.value);
             prefs3=await SharedPreferences.getInstance();
             await prefs3.setInt("oldLength3",prefs3.getInt("newLength3")??0);
             await prefs3.setInt("newLength3",data4[0].length);
-            print("Oxygen info "+prefs3.getInt("newLength3").toString());
-            print("Oxygen info "+prefs3.getInt("oldLength3").toString());
             if(prefs.getInt("oldLength")!=prefs.getInt("newLength")){
               str=str+"Hospital-Bed, ";
             }

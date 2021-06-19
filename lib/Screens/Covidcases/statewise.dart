@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:covid_infos/DataFetching/Statedatas.dart';
 import 'package:covid_infos/Screens/Covidcases/Indivisual_State.dart';
@@ -15,6 +16,8 @@ class statewise extends StatefulWidget {
 
 class _statewiseState extends State<statewise> {
   List _data = [];
+  int trialdata;
+  var prefs;
   @override
   void initState() {
     // TODO: implement initState
@@ -24,7 +27,7 @@ class _statewiseState extends State<statewise> {
   void loadCSV() async {
     final _rawData = await rootBundle.loadString("Assets/CSV/state_wise_daily.csv");
     List _listData = CsvToListConverter().convert(_rawData);
-    setState(() {
+    setState(() async {
       for (int i=0;i<_listData.length;i++){
         _data.add(_listData[i]);
       }
@@ -84,10 +87,10 @@ class _statewiseState extends State<statewise> {
                                 onPressed: (){
                                   String logo;
                                   List dailydata;
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index],dailydata:_data)));
-                                },
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index],dailydata:_data)));
+                                    },
                                 icon: Icon(Icons.info_outline,color: Colors.black,size: 27,),
                               ),
                             ),

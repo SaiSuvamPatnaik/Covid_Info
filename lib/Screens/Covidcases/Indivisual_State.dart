@@ -19,6 +19,8 @@ class _indivisualstateState extends State<indivisualstate> {
   String logo;
   List dailydata;
   _indivisualstateState({this.index,this.logo,this.dailydata});
+  var prefs;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -63,7 +65,7 @@ class _indivisualstateState extends State<indivisualstate> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 500,
+                          height: MediaQuery.of(context).size.height-200,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             boxShadow: [
@@ -74,7 +76,11 @@ class _indivisualstateState extends State<indivisualstate> {
                             ],
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(40.0),
-                                topLeft: Radius.circular(40.0)),
+                                topLeft: Radius.circular(40.0),
+                                bottomRight: Radius.circular(40.0),
+                                bottomLeft: Radius.circular(40.0)
+                            ),
+
                           ),
                           child: ListView.builder(
                               itemCount: 1,
@@ -327,7 +333,7 @@ class _indivisualstateState extends State<indivisualstate> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 20,),
+                                    SizedBox(height: 140,),
                                   ],
                                 );
                               }),
@@ -352,9 +358,11 @@ class _indivisualstateState extends State<indivisualstate> {
                   children: [
                     SpinKitWave(color: Colors.black,size: 70,),
                     SizedBox(height: 20,),
-                    Text("Initialising...",style: TextStyle(fontSize: 25),)
+                    Text("Loading ...",style: TextStyle(fontSize: 25),)
                   ],
-                )));
+                )
+              )
+          );
         }
       },
     );

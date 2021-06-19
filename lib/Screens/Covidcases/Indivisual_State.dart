@@ -1,26 +1,34 @@
 import 'dart:convert';
-
 import 'package:covid_infos/DataFetching/indivisual_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:horizontal_blocked_scroll_physics/horizontal_blocked_scroll_physics.dart';
+
+
 class indivisualstate extends StatefulWidget {
   int index;
-  String logo;
+  List logo;
   List dailydata;
-
   indivisualstate({this.index,this.logo,this.dailydata});
   @override
   _indivisualstateState createState() => _indivisualstateState(index:index,logo:logo,dailydata:dailydata);
 }
 
 class _indivisualstateState extends State<indivisualstate> {
-  int index;
-  String logo;
-  List dailydata;
-  _indivisualstateState({this.index,this.logo,this.dailydata});
-  var prefs;
+  int index,currentPage;
+  List dailydata,logo;
+  SharedPreferences prefs;
+  var var1,eventdirection;
 
+  _indivisualstateState({this.index,this.logo,this.dailydata});
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    currentPage=index;
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -40,22 +48,41 @@ class _indivisualstateState extends State<indivisualstate> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                                  radius: 55,
-                                  child: Text(logo,style: TextStyle(fontSize:50,fontWeight: FontWeight.w500),),
-                                ),
-                            decodedjson["data"]["regional"][index]["loc"].length>16?
-                            Text(decodedjson["data"]["regional"][index]["loc"],
-                              style: TextStyle(fontSize:25,color: Colors.black,fontWeight: FontWeight.w600),):
-                            Text(decodedjson["data"]["regional"][index]["loc"],
-                              style: TextStyle(fontSize:40,color: Colors.black,fontWeight: FontWeight.w600),),
-                          ],
-                        ),
+                    child: Listener(
+                      onPointerMove: (moveEvent){
+                        setState(() {
+                          eventdirection=moveEvent;
+                        });
+                      },
+                      child: PageView.builder(
+                        itemCount: 36,
+//                        physics: RightBlockedScrollPhysics(),
+                        onPageChanged: (value) => {
+                          setState(() => {
+                            if(eventdirection.delta.dx < 0) {
+                              currentPage==35?currentPage=0:currentPage = currentPage+1,
+                            },
+                            if(eventdirection.delta.dx > 0) {
+                              currentPage==0?currentPage=35:currentPage = currentPage-1,
+                            },
+                          })
+                        },
+                        itemBuilder: (context,index1){
+                          return Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 55,
+                                child: Text(logo[currentPage],style: TextStyle(fontSize:50,fontWeight: FontWeight.w500),),
+                              ),
+                              SizedBox(height: 10,),
+                              decodedjson["data"]["regional"][currentPage]["loc"].length>20?
+                              Text(decodedjson["data"]["regional"][currentPage]["loc"],
+                                style: TextStyle(fontSize:25,color: Colors.black,fontWeight: FontWeight.w600),):
+                              Text(decodedjson["data"]["regional"][currentPage]["loc"],
+                                style: TextStyle(fontSize:35,color: Colors.black,fontWeight: FontWeight.w600),),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -117,7 +144,7 @@ class _indivisualstateState extends State<indivisualstate> {
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Text("TL Cases",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-                                                      Text(decodedjson["data"]["regional"][index]["totalConfirmed"].toString(),style: TextStyle(color: Colors.white,fontSize: 23),),
+                                                      Text(decodedjson["data"]["regional"][currentPage]["totalConfirmed"].toString(),style: TextStyle(color: Colors.white,fontSize: 23),),
                                                     ],
                                                   )),
                                             ),
@@ -149,7 +176,7 @@ class _indivisualstateState extends State<indivisualstate> {
                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text("Foreign",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-                                                        Text(decodedjson["data"]["regional"][index]["confirmedCasesForeign"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
+                                                        Text(decodedjson["data"]["regional"][currentPage]["confirmedCasesForeign"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                                                       ],
                                                     )),
                                               ),
@@ -185,7 +212,7 @@ class _indivisualstateState extends State<indivisualstate> {
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     Text("Recovered",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-                                                    Text(decodedjson["data"]["regional"][index]["discharged"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
+                                                    Text(decodedjson["data"]["regional"][currentPage]["discharged"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                                                   ],
                                                 )),
                                           ),
@@ -217,7 +244,7 @@ class _indivisualstateState extends State<indivisualstate> {
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Text("Total Death",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-                                                      Text(decodedjson["data"]["regional"][index]["deaths"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
+                                                      Text(decodedjson["data"]["regional"][currentPage]["deaths"].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                                                     ],
                                                   )),
                                             ),
@@ -255,8 +282,8 @@ class _indivisualstateState extends State<indivisualstate> {
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     Text("Today +ve",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-                                                    index+4>=12?Text(dailydata[dailydata.length-3][index+4+1].toString(),style: TextStyle(color: Colors.white,fontSize: 20),):
-                                                    Text(dailydata[dailydata.length-3][index+4].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
+                                                    currentPage+4>=12?Text(dailydata[dailydata.length-3][currentPage+4+1].toString(),style: TextStyle(color: Colors.white,fontSize: 20),):
+                                                    Text(dailydata[dailydata.length-3][currentPage+4].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                                                   ],
                                                 )),
                                           ),
@@ -288,8 +315,8 @@ class _indivisualstateState extends State<indivisualstate> {
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Text("Today Rcvd",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-                                                      index+4>=12?Text(dailydata[dailydata.length-2][index+4+1].toString(),style: TextStyle(color: Colors.white,fontSize: 20),):
-                                                      Text(dailydata[dailydata.length-2][index+4].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
+                                                      currentPage+4>=12?Text(dailydata[dailydata.length-2][currentPage+4+1].toString(),style: TextStyle(color: Colors.white,fontSize: 20),):
+                                                      Text(dailydata[dailydata.length-2][currentPage+4].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                                                     ],
                                                   )),
                                             ),
@@ -325,8 +352,8 @@ class _indivisualstateState extends State<indivisualstate> {
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     Text("Today Death",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-                                                    index+4>=12?Text(dailydata[dailydata.length-1][index+4+1].toString(),style: TextStyle(color: Colors.white,fontSize: 20),)
-                                                        : Text(dailydata[dailydata.length-1][index+4].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
+                                                    currentPage+4>=12?Text(dailydata[dailydata.length-1][currentPage+4+1].toString(),style: TextStyle(color: Colors.white,fontSize: 20),)
+                                                        : Text(dailydata[dailydata.length-1][currentPage+4].toString(),style: TextStyle(color: Colors.white,fontSize: 20),),
                                                   ],
                                                 )),
                                           ),

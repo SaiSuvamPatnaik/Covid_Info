@@ -49,6 +49,7 @@ dependencies:
   flutter_local_notifications:
   firebase_core:
   shared_preferences:
+  horizontal_blocked_scroll_physics:
 
 dev_dependencies:
   flutter_test:

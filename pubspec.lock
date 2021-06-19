@@ -268,6 +268,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
+  horizontal_blocked_scroll_physics:
+    dependency: "direct main"
+    description:
+      name: horizontal_blocked_scroll_physics
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   http:
     dependency: "direct main"
     description:

@@ -8,6 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class statewise extends StatefulWidget {
   @override
@@ -15,9 +16,8 @@ class statewise extends StatefulWidget {
 }
 
 class _statewiseState extends State<statewise> {
-  List _data = [];
+  List _data = [],logo;
   int trialdata;
-  var prefs;
   @override
   void initState() {
     // TODO: implement initState
@@ -27,7 +27,7 @@ class _statewiseState extends State<statewise> {
   void loadCSV() async {
     final _rawData = await rootBundle.loadString("Assets/CSV/state_wise_daily.csv");
     List _listData = CsvToListConverter().convert(_rawData);
-    setState(() async {
+    setState((){
       for (int i=0;i<_listData.length;i++){
         _data.add(_listData[i]);
       }
@@ -85,18 +85,16 @@ class _statewiseState extends State<statewise> {
                               ),),
                               trailing: IconButton(
                                 onPressed: (){
-                                  String logo;
-                                  List dailydata;
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1[index],dailydata:_data)));
+                                      MaterialPageRoute(builder: (context) => indivisualstate(index:index,logo:datas1,dailydata:_data)));
                                     },
                                 icon: Icon(Icons.info_outline,color: Colors.black,size: 27,),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(10,0,10,0),
+                            padding: const EdgeInsets.fromLTRB(0,0,0,0),
                             child: Divider(
                               thickness: 1,
                             ),

@@ -76,8 +76,13 @@ class _homepageState extends State<homepage> {
                               alignment: Alignment.topLeft,
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(25,10,0,0),
-                                child: Text("Global Covid-19",style: TextStyle(fontSize: 35,fontFamily: "Sergoeui",fontWeight: FontWeight.bold),),
-                              )),
+                                child: Text("Global Covid-19",
+                                  style: TextStyle(fontSize: 35,fontFamily: "Sergoeui",
+                                      fontWeight: FontWeight.bold
+                                  )
+                                )
+                              )
+                          ),
                           SizedBox(height: 15,),
                           Container(
                             height: 130,
@@ -162,7 +167,8 @@ class _homepageState extends State<homepage> {
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.fromLTRB(5,5,0,0),
-                                              child: Text("Hospitals",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                              child: Text("Hospitals",style: TextStyle(fontFamily: "Helvetica",color: Colors.white
+                                                  ,fontSize: 25),),
                                             ),
 
                                           ],

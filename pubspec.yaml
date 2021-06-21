@@ -50,6 +50,7 @@ dependencies:
   firebase_core:
   shared_preferences:
   horizontal_blocked_scroll_physics:
+  flutter_swiper:
 
 dev_dependencies:
   flutter_test:

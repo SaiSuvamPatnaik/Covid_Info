@@ -6,6 +6,7 @@ import 'package:covid_infos/Screens/Covidcases/Indivisual.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,17 @@ class country extends StatefulWidget {
 
 class _countryState extends State<country> {
   final fieldText = TextEditingController();
-
+  final imageList = [
+    "Assets/Images/Carousel1.jpg",
+    "Assets/Images/Carousel2.jpg",
+    "Assets/Images/Carousel3.jpg",
+    "Assets/Images/Carousel4.jpg",
+    "Assets/Images/Carousel5.jpg",
+    "Assets/Images/Carousel6.jpg",
+    "Assets/Images/Carousel7.jpg",
+    "Assets/Images/Carousel8.jpg",
+    "Assets/Images/Carousel9.jpeg",
+  ];
   @override
   void initState() {
     // TODO: implement initState
@@ -45,13 +56,12 @@ class _countryState extends State<country> {
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.black,)),
                               ),
-                              width: 250,
+                              width: 230,
                               child: TextField(
                                 cursorColor: Colors.black,
                                 controller: fieldText,
                                 style: TextStyle(color: Colors.white,fontSize: 20),
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.search,color: Colors.white,),
                                   hintText: "Search...",
                                   hintStyle: TextStyle(color: Colors.white),
                                 ),
@@ -83,8 +93,45 @@ class _countryState extends State<country> {
                             },
                           )
                         ],
-                      ):AppBar(
-                        title: Text("Countries Cases"),
+                        bottom: PreferredSize(
+                          preferredSize: Size(0.0, MediaQuery.of(context).size.height/4.5),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0,0,0,14),
+                            child: Container(
+                              height: 170,
+                              child: Swiper(
+                                autoplay: true,
+                                duration: 200,
+                                itemCount: imageList.length,
+                                layout: SwiperLayout.STACK,
+                                itemWidth: MediaQuery.of(context).size.width-50,
+                                itemHeight: 300.0,
+                                itemBuilder: (context,index){
+                                  return Container(
+                                    height: 150,
+                                    width: MediaQuery.of(context).size.width-50,
+                                    child: Image(
+                                      image: AssetImage(imageList[index]),
+                                      alignment: Alignment.center,
+                                      height: 170,
+                                      width: MediaQuery.of(context).size.width - 10,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ) : AppBar(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.white70, width: 1),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0),
+                          ),
+                        ),
+                        title: Center(child: Text("Countries Cases")),
                         actions: [
                           IconButton(
                               icon:Icon(Icons.search),
@@ -92,43 +139,82 @@ class _countryState extends State<country> {
                                 data.onpresssearch();
                               })
                         ],
+                        bottom: PreferredSize(
+                          preferredSize: Size(0.0, MediaQuery.of(context).size.height/4.5),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0,0,0,14),
+                            child: Container(
+                              height: 170,
+                              child: Swiper(
+                                autoplay: true,
+                                duration: 200,
+                                itemCount: imageList.length,
+                                layout: SwiperLayout.STACK,
+                                itemWidth: MediaQuery.of(context).size.width-50,
+                                itemHeight: 300.0,
+                                itemBuilder: (context,index){
+                                  return Container(
+                                    height: 150,
+                                    width: MediaQuery.of(context).size.width-50,
+                                    child: Image(
+                                      image: AssetImage(imageList[index]),
+                                      alignment: Alignment.center,
+                                      height: 170,
+                                      width: MediaQuery.of(context).size.width - 10,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      body: data.countryfound1()==-1?ListView.builder(
-                          itemCount: decodedJson.length,
-                          itemBuilder: (context,index){
-                            return GestureDetector(
-                              onTap: (){
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => indivisual(decodedjson:decodedJson,index:index)));
-                              },
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(4,12,12,8),
-                                  child: ListTile(
-                                    leading: Hero(
-                                      tag: decodedJson[index]["country"],
-                                      child: ClipOval(
-                                        child: CachedNetworkImage(
-                                          width: 50,
-                                          height: 50,
-                                          fit: BoxFit.cover,
-                                          imageUrl: decodedJson[index]["countryInfo"]["flag"],
+                      body: data.countryfound1()==-1?
+                        Container(
+                          height: 500,
+                          child: ListView.builder(
+                            itemCount: decodedJson.length,
+                            itemBuilder: (context,index){
+                              return GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => indivisual(decodedjson:decodedJson,index:index)));
+                                },
+                                child: Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.white70, width: 1),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(4,12,12,8),
+                                    child: ListTile(
+                                      leading: Hero(
+                                        tag: decodedJson[index]["country"],
+                                        child: ClipOval(
+                                          child: CachedNetworkImage(
+                                            width: 50,
+                                            height: 50,
+                                            fit: BoxFit.cover,
+                                            imageUrl: decodedJson[index]["countryInfo"]["flag"],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    title: Text(decodedJson[index]["country"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                    subtitle: Row(
-                                      children: [
-                                        Text("Total Cases:"),
-                                        Text(decodedJson[index]["cases"].toString()),
-                                      ],
+                                      title: Text(decodedJson[index]["country"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                      subtitle: Row(
+                                        children: [
+                                          Text("Total Cases:"),
+                                          Text(decodedJson[index]["cases"].toString()),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          })
+                              );
+                            }),
+                        )
                           :ListView.builder(
                           itemCount: 1,
                           itemBuilder: (context,index){

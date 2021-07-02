@@ -17,13 +17,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class homepage extends StatefulWidget {
+  SharedPreferences prefsnewtrial;
+  homepage({this.prefsnewtrial});
   @override
   _homepageState createState() => _homepageState();
 }
 
 class _homepageState extends State<homepage> {
+
   List<Map<dynamic, dynamic>> worldstats = [
     {
       "text1": "TOTAL Case",
@@ -53,6 +57,9 @@ class _homepageState extends State<homepage> {
         if (snapshot.hasData){
           var value = snapshot.data;
           var decodedJson = json.decode(value.body);
+          widget.prefsnewtrial.setInt("HomeGlobalTotalcase",decodedJson[worldstats[0]["text2"]]);
+          widget.prefsnewtrial.setInt("HomeGlobalTotalDeath",decodedJson[worldstats[1]["text2"]]);
+          widget.prefsnewtrial.setInt("HomeGlobalTotalRecovery",decodedJson[worldstats[2]["text2"]]);
           return Scaffold(
             backgroundColor: Colors.white,
             body: SafeArea(
@@ -406,7 +413,7 @@ class _homepageState extends State<homepage> {
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.fromLTRB(5,5,0,0),
-                                              child: Text("Contacts",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
+                                              child: Text("Contact",style: TextStyle(fontFamily: "Helvetica",color: Colors.white,fontSize: 25),),
                                             ),
 
                                           ],
@@ -529,7 +536,9 @@ class _homepageState extends State<homepage> {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(worldstats[index]["text1"],style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
-                                                Text(index==0?"178207832":index==1?"3858077":"162716868",style: TextStyle(fontSize: 23,color: Colors.white),)
+                                                Text(index==0?widget.prefsnewtrial.getInt("HomeGlobalTotalcase").toString():index==1
+                                                    ? widget.prefsnewtrial.getInt("HomeGlobalTotalDeath").toString()
+                                                    : widget.prefsnewtrial.getInt("HomeGlobalTotalRecovery").toString(),style: TextStyle(fontSize: 23,color: Colors.white),)
                                               ],
                                             ),
                                           ),

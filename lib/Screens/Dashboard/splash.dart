@@ -36,10 +36,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
   List data2=[];
   List data3=[];
   List data4=[];
+  SharedPreferences prefsnewtrial;
   String str="";
   DatabaseReference ref = FirebaseDatabase().reference().child("Details");
   void initState() {
     super.initState();
+    initialise();
     getdata();
     FirebaseMessaging.onMessage.listen((RemoteMessage message)
     {
@@ -82,14 +84,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ],
                   ),
                 ),
-
               );
             }
         );
       }
     });
   }
-
+  initialise() async {
+    prefsnewtrial=await SharedPreferences.getInstance();
+  }
   getdata() async{
     _loadCSV();
   }
@@ -259,10 +262,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 style: TextStyle(color: Colors.white),
                                 textAlign: TextAlign.end,
                               ),
-                              onPressed: () =>
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => Navigation())),
+                              onPressed: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Navigation(prefsnewtrial:prefsnewtrial)));
+                              }
                             ),
                           ),
                         ),

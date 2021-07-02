@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:covid_infos/Screens/Basic_infos_about_Covid/General/basicinfo.dart';
 import 'package:covid_infos/Screens/Covidcases/statewise.dart';
 import 'package:covid_infos/Services/totalsample.dart';
@@ -24,7 +25,6 @@ class _indivisualState extends State<indivisual> {
     double b = a/100;
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -33,9 +33,14 @@ class _indivisualState extends State<indivisual> {
                 tag: decodedjson[index]["country"],
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0,70,0,0),
-                  child: Image.network(decodedjson[index]["countryInfo"]["flag"],scale: 2,),
+                  child: Container(
+                    child: CachedNetworkImage(
+                      height: 90,
+                      fit: BoxFit.cover,
+                      imageUrl: decodedjson[index]["countryInfo"]["flag"]),
+                    ),
+                  ),
                 ),
-              ),
               SizedBox(height: 20,),
               decodedjson[index]["country"].length>16?SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -303,7 +308,6 @@ class _indivisualState extends State<indivisual> {
           ),
           margin: 10,
           getTitles: (value) {
-            print(value);
             switch (value.toInt()) {
               case 1:
                 return 'Apr';

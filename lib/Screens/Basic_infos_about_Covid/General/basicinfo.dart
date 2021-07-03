@@ -31,7 +31,7 @@ class infos extends StatelessWidget {
             // if (!Vx.isWeb)
             Padding(
               padding: const EdgeInsets.fromLTRB(0,0,0,0),
-              child: SvgPicture.network("https://raw.githubusercontent.com/iampawan/IndiaBeatsCovid/main/assets/images/doctor-woman.svg",
+              child: SvgPicture.asset("Assets/Images/Infos1.svg",
                 height: 300.0,
               ).w32(context).centered(),
             ),
@@ -83,7 +83,7 @@ class infos extends StatelessWidget {
               ),
             ),
             // if (!Vx.isWeb)
-            SvgPicture.network("https://raw.githubusercontent.com/iampawan/IndiaBeatsCovid/main/assets/images/mask-woman.svg",
+            SvgPicture.asset("Assets/Images/Infos2.svg",
               height: 200.0,
             ).w32(context).centered(),
           ].hStack(crossAlignment: CrossAxisAlignment.start),
@@ -142,7 +142,7 @@ class infos extends StatelessWidget {
               color: context.textTheme.bodyText1.color,
             ).w56(context),
             // if (!Vx.isWeb)
-            SvgPicture.network("https://raw.githubusercontent.com/iampawan/IndiaBeatsCovid/main/assets/images/mask-man.svg",
+            SvgPicture.asset("Assets/Images/Infos3.svg",
               height: 200.0,
             ).w32(context).centered(),
           ].hStack(),

@@ -141,7 +141,7 @@ class _homepageState extends State<homepage> {
                                 onTap: (){
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => hospital()));
+                                      MaterialPageRoute(builder: (context) => hospital(prefsnewtrial:widget.prefsnewtrial)));
                                 },
                                 child: Card(
                                   elevation: 10,
@@ -338,7 +338,7 @@ class _homepageState extends State<homepage> {
                                 onTap: (){
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => statewise()));
+                                      MaterialPageRoute(builder: (context) => statewise(prefsnewtrial : widget.prefsnewtrial)));
                                 },
                                 child: Card(
                                   elevation: 10,
@@ -380,7 +380,7 @@ class _homepageState extends State<homepage> {
                                 onTap: (){
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => contacts()));
+                                      MaterialPageRoute(builder: (context) => contacts(prefsnewtrial:widget.prefsnewtrial)));
                                 },
                                 child: Card(
                                   elevation: 10,
@@ -563,7 +563,7 @@ class _homepageState extends State<homepage> {
                                 onTap: (){
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => hospital()));
+                                      MaterialPageRoute(builder: (context) => hospital(prefsnewtrial:widget.prefsnewtrial)));
                                 },
                                 child: Card(
                                   elevation: 10,
@@ -759,7 +759,7 @@ class _homepageState extends State<homepage> {
                                 onTap: (){
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => statewise()));
+                                      MaterialPageRoute(builder: (context) => statewise(prefsnewtrial: widget.prefsnewtrial,)));
                                 },
                                 child: Card(
                                   elevation: 10,
@@ -801,7 +801,7 @@ class _homepageState extends State<homepage> {
                                 onTap: (){
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => contacts()));
+                                      MaterialPageRoute(builder: (context) => contacts(prefsnewtrial:widget.prefsnewtrial)));
                                 },
                                 child: Card(
                                   elevation: 10,

@@ -176,6 +176,7 @@ class _totalsampleState extends State<totalsample> {
               else{
                 return Scaffold(
                   body: Center(
+                    
                     child: Text("Loading Data !!!",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                   ),
                 );
